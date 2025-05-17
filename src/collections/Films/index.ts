@@ -19,11 +19,6 @@ export const Films: CollectionConfig<'films'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
-    meta: {
-      image: true,
-      description: true,
-    },
   },
   fields: [
     {
