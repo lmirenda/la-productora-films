@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-
+import { usePathname } from 'next/navigation'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
@@ -28,14 +28,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
+          {isEnabled && (
+            <div className="fixed top-0 left-0 right-0 z-50">
+              <AdminBar
+                adminBarProps={{
+                  preview: isEnabled,
+                }}
+              />
+            </div>
+          )}
 
           <Header />
-          {children}
+          <main className={cn('relative z-0', isEnabled && 'pt-[var(--admin-bar-height)]')}>
+            {children}
+          </main>
           <Footer />
         </Providers>
       </body>
