@@ -3,6 +3,7 @@ import { draftMode } from 'next/headers'
 import { AdminBar } from '@/components/AdminBar'
 import { Header } from '@/Header/Component'
 import { cn } from '@/utilities/ui'
+import { Footer } from '@/Footer/Component'
 
 export default async function HomeLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()

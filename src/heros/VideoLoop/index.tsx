@@ -12,7 +12,7 @@ const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
       const timeout = setTimeout(() => {
         setDisplayText((prev) => prev + text[currentIndex])
         setCurrentIndex((prev) => prev + 1)
-      }, 80) // This creates roughly 100 WPM typing speed
+      }, 80) // about 100 WPM typing speed
 
       return () => clearTimeout(timeout)
     }
@@ -31,6 +31,16 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
 
   useEffect(() => {
     setHeaderTheme('dark')
+
+    // Disable any page scrolling while this component is mounted.
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      // Re‐enable scrolling when unmounted
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+    }
   }, [setHeaderTheme])
 
   const videoId = 849162755
@@ -38,9 +48,11 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden"
+      className="fixed inset-0 overflow-hidden"
       style={{
-        height: '100dvh', // true full‐screen on mobile
+        // Use 100dvh to account for mobile browser UI + truly fill screen
+        height: '100dvh',
+        width: '100vw',
         margin: 0,
         padding: 0,
       }}
@@ -53,7 +65,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
         title="Background Video"
         className="absolute top-1/2 left-1/2"
         style={{
-          // make sure iframe always covers the container
+          // Make sure the video always covers the full area
           minWidth: '100%',
           minHeight: '100%',
           width: 'auto',

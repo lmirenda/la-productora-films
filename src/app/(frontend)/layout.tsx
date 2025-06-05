@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { usePathname } from 'next/navigation'
 import { cn } from '@/utilities/ui'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'

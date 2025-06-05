@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     users: User;
     films: Film;
+    commercials: Commercial;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -90,6 +91,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     films: FilmsSelect<false> | FilmsSelect<true>;
+    commercials: CommercialsSelect<false> | CommercialsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -193,7 +195,16 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | EmptyBlock
+    | FilmArchiveBlock
+    | CommercialArchiveBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -731,6 +742,45 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmptyBlock".
+ */
+export interface EmptyBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'empty';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FilmArchiveBlock".
+ */
+export interface FilmArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  selectedFilms?:
+    | {
+        film: number | Film;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'filmArchive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "films".
  */
 export interface Film {
@@ -757,6 +807,69 @@ export interface Film {
   thumbnail: number | Media;
   releaseDate: string;
   order?: number | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CommercialArchiveBlock".
+ */
+export interface CommercialArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  selectedCommercials?:
+    | {
+        commercial: number | Commercial;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'commercialArchive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commercials".
+ */
+export interface Commercial {
+  id: number;
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  director?: string | null;
+  vimeoUrl: string;
+  youtubeUrl?: string | null;
+  thumbnail: number | Media;
+  releaseDate: string;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -960,6 +1073,10 @@ export interface PayloadLockedDocument {
         value: number | Film;
       } | null)
     | ({
+        relationTo: 'commercials';
+        value: number | Commercial;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1057,6 +1174,9 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        empty?: T | EmptyBlockSelect<T>;
+        filmArchive?: T | FilmArchiveBlockSelect<T>;
+        commercialArchive?: T | CommercialArchiveBlockSelect<T>;
       };
   meta?:
     | T
@@ -1153,6 +1273,44 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EmptyBlock_select".
+ */
+export interface EmptyBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FilmArchiveBlock_select".
+ */
+export interface FilmArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  selectedFilms?:
+    | T
+    | {
+        film?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CommercialArchiveBlock_select".
+ */
+export interface CommercialArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  selectedCommercials?:
+    | T
+    | {
+        commercial?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1329,6 +1487,24 @@ export interface FilmsSelect<T extends boolean = true> {
   thumbnail?: T;
   releaseDate?: T;
   order?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commercials_select".
+ */
+export interface CommercialsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  director?: T;
+  vimeoUrl?: T;
+  youtubeUrl?: T;
+  thumbnail?: T;
+  releaseDate?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1713,6 +1889,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'films';
           value: number | Film;
+        } | null)
+      | ({
+          relationTo: 'commercials';
+          value: number | Commercial;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

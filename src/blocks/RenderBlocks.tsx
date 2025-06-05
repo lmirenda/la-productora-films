@@ -7,6 +7,9 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { EmptyBlock } from '@/blocks/Empty/Component'
+import { FilmArchiveBlock } from '@/blocks/FilmArchiveBlock/Component'
+import { CommercialArchiveBlock } from '@/blocks/CommercialArchiveBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -14,6 +17,9 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  empty: EmptyBlock,
+  filmArchive: FilmArchiveBlock,
+  commercialArchive: CommercialArchiveBlock
 }
 
 export const RenderBlocks: React.FC<{
@@ -34,7 +40,7 @@ export const RenderBlocks: React.FC<{
 
             if (Block) {
               return (
-                <div className="my-16" key={index}>
+                <div className="mb-16 mt-4" key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>
