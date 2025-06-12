@@ -194,6 +194,8 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    sponsors?: (number | Media)[] | null;
+    title: string;
   };
   layout: (
     | CallToActionBlock
@@ -204,6 +206,7 @@ export interface Page {
     | EmptyBlock
     | FilmArchiveBlock
     | CommercialArchiveBlock
+    | ContactUsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -878,6 +881,15 @@ export interface Commercial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactUsBlock".
+ */
+export interface ContactUsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactUs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1165,6 +1177,8 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        sponsors?: T;
+        title?: T;
       };
   layout?:
     | T
@@ -1177,6 +1191,7 @@ export interface PagesSelect<T extends boolean = true> {
         empty?: T | EmptyBlockSelect<T>;
         filmArchive?: T | FilmArchiveBlockSelect<T>;
         commercialArchive?: T | CommercialArchiveBlockSelect<T>;
+        contactUs?: T | ContactUsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1311,6 +1326,14 @@ export interface CommercialArchiveBlockSelect<T extends boolean = true> {
         commercial?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactUsBlock_select".
+ */
+export interface ContactUsBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

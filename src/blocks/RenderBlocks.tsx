@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { EmptyBlock } from '@/blocks/Empty/Component'
 import { FilmArchiveBlock } from '@/blocks/FilmArchiveBlock/Component'
 import { CommercialArchiveBlock } from '@/blocks/CommercialArchiveBlock/Component'
+import { ContactUsBlock } from '@/blocks/ContactUs/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -19,7 +20,8 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   empty: EmptyBlock,
   filmArchive: FilmArchiveBlock,
-  commercialArchive: CommercialArchiveBlock
+  commercialArchive: CommercialArchiveBlock,
+  contactUs: ContactUsBlock,
 }
 
 export const RenderBlocks: React.FC<{

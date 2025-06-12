@@ -31,7 +31,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className="absolute top-0 left-0 right-0 z-40 bg-black/50 backdrop-blur-sm pointer-events-none"
+      // bg-black/50 for off black tint
+      className="absolute top-0 left-0 right-0 z-40  backdrop-blur-sm pointer-events-none"
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div className="container py-4 flex items-center justify-between pointer-events-auto">

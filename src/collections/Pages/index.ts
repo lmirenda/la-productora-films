@@ -14,6 +14,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { ContactUs } from '@/blocks/ContactUs/config'
 
 import {
   MetaDescriptionField,
@@ -23,7 +24,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { CommercialArchive } from '@/blocks/CommercialArchiveBlock/config'
-
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -79,7 +79,17 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Empty, FilmArchive, CommercialArchive],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                Empty,
+                FilmArchive,
+                CommercialArchive,
+                ContactUs,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

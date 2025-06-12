@@ -71,6 +71,17 @@ export const hero: Field = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'sponsors',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true,
+    },
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
   ],
   label: false,
 }
