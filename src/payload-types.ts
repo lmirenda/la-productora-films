@@ -74,6 +74,7 @@ export interface Config {
     users: User;
     films: Film;
     commercials: Commercial;
+    employees: Employee;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -92,6 +93,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     films: FilmsSelect<false> | FilmsSelect<true>;
     commercials: CommercialsSelect<false> | CommercialsSelect<true>;
+    employees: EmployeesSelect<false> | EmployeesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -207,6 +209,7 @@ export interface Page {
     | FilmArchiveBlock
     | CommercialArchiveBlock
     | ContactUsBlock
+    | ExpertiseBlock
   )[];
   meta?: {
     title?: string | null;
@@ -892,6 +895,44 @@ export interface ContactUsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpertiseBlock".
+ */
+export interface ExpertiseBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'expertise';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "employees".
+ */
+export interface Employee {
+  id: number;
+  title: string;
+  role: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  pic: number | Media;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1091,6 +1132,10 @@ export interface PayloadLockedDocument {
         value: number | Commercial;
       } | null)
     | ({
+        relationTo: 'employees';
+        value: number | Employee;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1194,6 +1239,7 @@ export interface PagesSelect<T extends boolean = true> {
         filmArchive?: T | FilmArchiveBlockSelect<T>;
         commercialArchive?: T | CommercialArchiveBlockSelect<T>;
         contactUs?: T | ContactUsBlockSelect<T>;
+        expertise?: T | ExpertiseBlockSelect<T>;
       };
   meta?:
     | T
@@ -1338,6 +1384,14 @@ export interface CommercialArchiveBlockSelect<T extends boolean = true> {
  * via the `definition` "ContactUsBlock_select".
  */
 export interface ContactUsBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpertiseBlock_select".
+ */
+export interface ExpertiseBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -1532,6 +1586,20 @@ export interface CommercialsSelect<T extends boolean = true> {
   youtubeUrl?: T;
   thumbnail?: T;
   releaseDate?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "employees_select".
+ */
+export interface EmployeesSelect<T extends boolean = true> {
+  title?: T;
+  role?: T;
+  pic?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1920,6 +1988,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'commercials';
           value: number | Commercial;
+        } | null)
+      | ({
+          relationTo: 'employees';
+          value: number | Employee;
         } | null);
     global?: string | null;
     user?: (number | null) | User;
