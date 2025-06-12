@@ -38,9 +38,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 )}
 
                 {contentType === 'media' && media && (
-                  <div className="w-full h-auto">
-                    <Media resource={media} imgClassName="w-full h-auto" />
-                  </div>
+                  <Media resource={media} imgClassName="w-full h-auto" />
                 )}
 
                 {enableLink && <CMSLink {...link} />}
