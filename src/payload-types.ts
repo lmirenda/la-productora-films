@@ -460,7 +460,7 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
-        contentType?: ('text' | 'media') | null;
+        contentType?: ('text' | 'media' | 'employee') | null;
         richText?: {
           root: {
             type: string;
@@ -477,6 +477,7 @@ export interface ContentBlock {
           [k: string]: unknown;
         } | null;
         media?: (number | null) | Media;
+        employee?: (number | null) | Employee;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -503,6 +504,21 @@ export interface ContentBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "employees".
+ */
+export interface Employee {
+  id: number;
+  title: string;
+  role: string;
+  pic: number | Media;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -904,35 +920,6 @@ export interface ExpertiseBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "employees".
- */
-export interface Employee {
-  id: number;
-  title: string;
-  role: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  pic: number | Media;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1291,6 +1278,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         contentType?: T;
         richText?: T;
         media?: T;
+        employee?: T;
         enableLink?: T;
         link?:
           | T

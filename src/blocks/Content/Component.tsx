@@ -2,8 +2,9 @@ import { cn } from '@/utilities/ui'
 import React from 'react'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
+import { EmployeeCard } from '@/components/EmployeeCard'
 
-import type { ContentBlock as ContentBlockProps } from '@/payload-types'
+import type { ContentBlock as ContentBlockProps, Employee } from '@/payload-types'
 
 import { CMSLink } from '../../components/Link'
 
@@ -23,7 +24,10 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
-            const { enableLink, link, richText, media, contentType, size } = col
+            const { enableLink, link, richText, media, employee, contentType, size } = col
+
+            // Handle employee data
+            const employeeData = typeof employee === 'object' ? (employee as Employee) : null
 
             return (
               <div
@@ -40,6 +44,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 {contentType === 'media' && media && (
                   <Media resource={media} imgClassName="w-full h-auto" />
                 )}
+
+                {contentType === 'employee' && employeeData && <EmployeeCard doc={employeeData} />}
 
                 {enableLink && <CMSLink {...link} />}
               </div>

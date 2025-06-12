@@ -46,6 +46,10 @@ const columnFields: Field[] = [
         label: 'Media',
         value: 'media',
       },
+      {
+        label: 'Employee',
+        value: 'employee',
+      },
     ],
   },
   {
@@ -73,6 +77,30 @@ const columnFields: Field[] = [
     required: false,
     admin: {
       condition: (data, siblingData) => siblingData?.contentType === 'media',
+    },
+  },
+  {
+    name: 'employee',
+    type: 'relationship',
+    relationTo: 'employees',
+    required: false,
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'employee',
+    },
+    hooks: {
+      afterRead: [
+        async ({ value, req }) => {
+          if (typeof value === 'number') {
+            const populated = await req.payload.findByID({
+              collection: 'employees',
+              id: value,
+              depth: 1,
+            })
+            return populated
+          }
+          return value
+        },
+      ],
     },
   },
   {

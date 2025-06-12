@@ -28,7 +28,7 @@ export const Employees: CollectionConfig<'employees'> = {
     },
     {
       name: 'role',
-      type: 'richText',
+      type: 'text',
       required: true,
       localized: true,
     },
