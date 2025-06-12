@@ -50,22 +50,23 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     <div
       className="fixed inset-0 overflow-hidden"
       style={{
-        // Use 100dvh to account for mobile browser UI + truly fill screen
         height: '100dvh',
         width: '100vw',
         margin: 0,
         padding: 0,
       }}
     >
+      {/* Permanent black background */}
+      <div className="absolute inset-0 bg-black" />
+
       <iframe
         src={videoSrc}
         frameBorder="0"
         allow="autoplay; fullscreen"
         allowFullScreen
         title="Background Video"
-        className="absolute top-1/2 left-1/2"
+        className="absolute top-1/2 left-1/2 z-[1]"
         style={{
-          // Make sure the video always covers the full area
           minWidth: '100%',
           minHeight: '100%',
           width: 'auto',

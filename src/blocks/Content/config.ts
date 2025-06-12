@@ -34,6 +34,21 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'contentType',
+    type: 'select',
+    defaultValue: 'text',
+    options: [
+      {
+        label: 'Text',
+        value: 'text',
+      },
+      {
+        label: 'Media',
+        value: 'media',
+      },
+    ],
+  },
+  {
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
@@ -47,6 +62,18 @@ const columnFields: Field[] = [
       },
     }),
     label: false,
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'text',
+    },
+  },
+  {
+    name: 'media',
+    type: 'upload',
+    relationTo: 'media',
+    required: false,
+    admin: {
+      condition: (data, siblingData) => siblingData?.contentType === 'media',
+    },
   },
   {
     name: 'enableLink',
