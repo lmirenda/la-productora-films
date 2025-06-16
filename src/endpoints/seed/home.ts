@@ -15,6 +15,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
     _status: 'published',
     hero: {
       type: 'highImpact',
+      title: 'Home',
       links: [
         {
           link: {
@@ -666,7 +667,8 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
       },
     ],
     meta: {
-      description: 'International production team in Uruguay offering expert support, global standards, and seamless media shoots for agencies and clients worldwide.',
+      description:
+        'International production team in Uruguay offering expert support, global standards, and seamless media shoots for agencies and clients worldwide.',
       image: heroImage.id,
       title: 'La Productora Films',
     },
