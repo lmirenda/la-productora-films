@@ -7,7 +7,7 @@ export type Props = {
 
 export const ContactUsBlock: React.FC<Props> = () => {
   return (
-    <div className="w-full bg-black text-white py-4 px-20">
+    <div className="w-full bg-black text-white py-4 container">
       <div className="max-w-4xl space-y-12">
         {/* Location */}
         <div className="flex items-start gap-4">
