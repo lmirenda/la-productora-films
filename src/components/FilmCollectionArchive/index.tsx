@@ -61,21 +61,34 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
 
       {/* Modal */}
       {selectedFilm?.vimeoUrl && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4">
-          <div className="relative w-full max-w-4xl aspect-video">
-            <iframe
-              src={selectedFilm.vimeoUrl}
-              allow="autoplay; fullscreen"
-              allowFullScreen
-              className="w-full h-full rounded"
-            />
-            <button
-              onClick={() => setSelectedFilm(null)}
-              className="absolute top-2 right-2 text-white bg-black/70 rounded-full p-2 hover:bg-white/20"
-              aria-label="Close"
-            >
-              ✕
-            </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/90" onClick={() => setSelectedFilm(null)} />
+
+          {/* Modal window */}
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+            {/* Extract the ID from any Vimeo URL */}
+            {(() => {
+              let videoId = String(selectedFilm.vimeoUrl)
+              try {
+                // new URL(...) handles query strings, trailing slashes, etc.
+                const url = new URL(selectedFilm.vimeoUrl)
+                videoId = url.pathname.split('/').filter(Boolean).pop() || videoId
+              } catch {
+                // fallback if URL parsing fails
+                const parts = selectedFilm.vimeoUrl.split('/')
+                videoId = parts[parts.length - 1] || ''
+              }
+              return (
+                <iframe
+                  src={`https://player.vimeo.com/video/${videoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0&controls=1`}
+                  frameBorder="0"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              )
+            })()}
           </div>
         </div>
       )}
