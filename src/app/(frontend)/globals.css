@@ -100,6 +100,6 @@ html {
 }
 
 html[data-theme='dark'],
-html[data-theme='light'] {
+html[data-theme='dark'] {
   opacity: initial;
 }
