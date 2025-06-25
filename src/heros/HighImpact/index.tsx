@@ -30,7 +30,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
           </h1>
 
           {richText && (
-            <div className="max-w-[450px] mx-auto text-xl font-semibold text-center">
+            <div className="max-w-[450px] mx-auto text-lg md:text-xl font-semibold text-center">
               <RichText data={richText} enableGutter={false} />
             </div>
           )}
@@ -38,9 +38,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
 
         {Array.isArray(sponsors) && sponsors.length > 0 && (
           <div className="pb-4">
-            <ul className="flex justify-center gap-4 flex-wrap">
+            <ul className="flex justify-center gap-2 md:gap-4 flex-wrap">
               {sponsors.map((sponsor, i) => {
-                return <Media key={i} resource={sponsor} />
+                return (
+                  <div key={i} className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
+                    <Media resource={sponsor} />
+                  </div>
+                )
               })}
             </ul>
           </div>
