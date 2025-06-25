@@ -30,7 +30,7 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
 
   return (
     <div className="container">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8">
         {films?.map((film, index) => {
           const thumbnail = typeof film.thumbnail === 'object' ? film.thumbnail : null
 
