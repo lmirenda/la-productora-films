@@ -27,8 +27,8 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
   }, [selectedCommercial])
 
   return (
-    <div className="container">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-px mx-auto w-full">
+    <div className="">
+      <div className="grid grid-cols-1 gap-px mx-auto w-full">
         {commercials?.map((commercial, index) => {
           const thumbnail = typeof commercial.thumbnail === 'object' ? commercial.thumbnail : null
           let src: string
@@ -40,7 +40,7 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
           return (
             <div
               key={index}
-              className="relative w-full aspect-[11/5] cursor-pointer overflow-hidden group"
+              className="relative w-full aspect-[16/5] cursor-pointer overflow-hidden group"
               onClick={() => setSelectedCommercial(commercial)}
             >
               {thumbnail && (
