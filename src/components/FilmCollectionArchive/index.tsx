@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Film } from '@/payload-types'
 import { Media } from '@/components/Media'
+import RichText from '@/components/RichText'
 
 export type Props = {
   films: Film[]
@@ -52,6 +53,19 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
                 <div className="text-white font-semibold text-xl leading-tight">
                   <p className="uppercase">{film.title}</p>
                   <p className="text-base mt-1">{new Date(film.releaseDate).getFullYear()}</p>
+                  <div className="mt-4">
+                    {film.platform && <p className="text-sm opacity-90">{film.platform}</p>}
+                    {film.description && (
+                      <div className="text-xs mt-2 opacity-75 line-clamp-2">
+                        <RichText
+                          data={film.description}
+                          enableGutter={false}
+                          enableProse={false}
+                          className="text-xs"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

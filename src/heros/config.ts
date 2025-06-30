@@ -39,6 +39,10 @@ export const hero: Field = {
           label: 'Video Loop',
           value: 'videoLoop',
         },
+        {
+          label: 'No Impact',
+          value: 'noImpact',
+        },
       ],
       required: true,
     },

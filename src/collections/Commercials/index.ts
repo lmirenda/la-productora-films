@@ -8,7 +8,7 @@ export const Commercials: CollectionConfig<'commercials'> = {
   slug: 'commercials',
   labels: {
     singular: 'Commercial',
-    plural: 'Commercials'
+    plural: 'Commercials',
   },
   access: {
     create: authenticated,
@@ -58,6 +58,10 @@ export const Commercials: CollectionConfig<'commercials'> = {
       name: 'releaseDate',
       type: 'date',
       required: true,
+    },
+    {
+      name: 'client',
+      type: 'text',
     },
     ...slugField(),
   ],

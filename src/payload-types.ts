@@ -155,7 +155,7 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'videoLoop';
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'videoLoop' | 'noImpact';
     richText?: {
       root: {
         type: string;
@@ -514,6 +514,7 @@ export interface Employee {
   title: string;
   role: string;
   pic: number | Media;
+  email: string;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -831,6 +832,7 @@ export interface Film {
   thumbnail: number | Media;
   releaseDate: string;
   order?: number | null;
+  platform?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -894,6 +896,7 @@ export interface Commercial {
   youtubeUrl?: string | null;
   thumbnail: number | Media;
   releaseDate: string;
+  client?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1556,6 +1559,7 @@ export interface FilmsSelect<T extends boolean = true> {
   thumbnail?: T;
   releaseDate?: T;
   order?: T;
+  platform?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1574,6 +1578,7 @@ export interface CommercialsSelect<T extends boolean = true> {
   youtubeUrl?: T;
   thumbnail?: T;
   releaseDate?: T;
+  client?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1588,6 +1593,7 @@ export interface EmployeesSelect<T extends boolean = true> {
   title?: T;
   role?: T;
   pic?: T;
+  email?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

@@ -8,7 +8,7 @@ export const Films: CollectionConfig<'films'> = {
   slug: 'films',
   labels: {
     singular: 'Film',
-    plural: 'Films'
+    plural: 'Films',
   },
   access: {
     create: authenticated,
@@ -62,7 +62,11 @@ export const Films: CollectionConfig<'films'> = {
     {
       name: 'order',
       type: 'number',
-      unique: true
+      unique: true,
+    },
+    {
+      name: 'platform',
+      type: 'text',
     },
     ...slugField(),
   ],

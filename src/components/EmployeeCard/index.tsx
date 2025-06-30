@@ -4,14 +4,14 @@ import React from 'react'
 import type { Employee } from '@/payload-types'
 import { Media } from '@/components/Media'
 
-export type EmployeeCardData = Pick<Employee, 'slug' | 'role' | 'title' | 'pic'>
+export type EmployeeCardData = Pick<Employee, 'slug' | 'role' | 'title' | 'pic' | 'email'>
 
 export const EmployeeCard: React.FC<{
   className?: string
   doc?: EmployeeCardData
 }> = (props) => {
   const { className, doc } = props
-  const { role, title, pic } = doc || {}
+  const { role, title, pic, email } = doc || {}
 
   return (
     <article
@@ -33,7 +33,8 @@ export const EmployeeCard: React.FC<{
         {/* Text overlay - appears on hover */}
         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <h3 className="text-xl font-medium mb-2">{title}</h3>
-          <p className="text-sm uppercase tracking-wider">{role}</p>
+          <p className="text-sm uppercase tracking-wider mb-2">{role}</p>
+          {email && <p className="text-xs">{email}</p>}
         </div>
       </div>
     </article>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Commercial, Film } from '@/payload-types'
 import Image from 'next/image'
+import RichText from '@/components/RichText'
 
 export type Props = {
   commercials: Commercial[]
@@ -54,6 +55,19 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
                 <div className="text-white font-semibold text-xl leading-tight">
                   <p className="uppercase">{commercial.title}</p>
                   <p className="text-base mt-1">{new Date(commercial.releaseDate).getFullYear()}</p>
+                  <div className="mt-4">
+                    {commercial.client && <p className="text-sm opacity-90">{commercial.client}</p>}
+                    {commercial.description && (
+                      <div className="text-xs mt-2 opacity-75 line-clamp-2">
+                        <RichText
+                          data={commercial.description}
+                          enableGutter={false}
+                          enableProse={false}
+                          className="text-xs"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

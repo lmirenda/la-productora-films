@@ -38,6 +38,12 @@ export const Employees: CollectionConfig<'employees'> = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'email',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     ...slugField(),
   ],
   versions: {
