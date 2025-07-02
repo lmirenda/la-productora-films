@@ -54,14 +54,14 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center px-4">
                 <div className="text-white flex flex-col items-center w-full">
                   {commercial.client && (
-                    <p className="text-3xl opacity-90 tracking-wide uppercase font-inter font-[300]">
+                    <p className="text-base sm:text-lg md:text-2xl opacity-90 tracking-wide uppercase font-inter font-[300]">
                       {commercial.client}
                     </p>
                   )}
-                  <p className="uppercase text-7xl leading-tight my-4 font-inter font-[500]">
+                  <p className="uppercase text-2xl sm:text-4xl md:text-6xl leading-tight my-2 sm:my-4 font-inter font-[500]">
                     {commercial.title}
                   </p>
-                  <p className="text-5xl opacity-90 font-inter font-[100]">
+                  <p className="text-lg sm:text-2xl md:text-4xl opacity-90 font-inter font-[100]">
                     {new Date(commercial.releaseDate).getFullYear()}
                   </p>
                 </div>
