@@ -85,18 +85,18 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       />
 
       {/* Overlayed text */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
+      {/* <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
         <h1 className="text-white text-5xl md:text-7xl font-bold text-center">
           <TypewriterText text="La Productora Films" />
         </h1>
-      </div>
+      </div> */}
 
       {/* Bottom right rebate link */}
       <a
         href="https://uruguayaudiovisual.com/"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 z-20 text-white bg-black/60 px-4 py-2 rounded shadow hover:bg-black/80 transition-colors text-lg pointer-events-auto"
+        className="fixed bottom-4 right-4 z-20 text-white px-4 py-2 rounded shadow hover:bg-black/80 transition-colors text-lg pointer-events-auto"
       >
         See rebate possibilities
       </a>
