@@ -1,5 +1,5 @@
 import React from 'react'
-import { MapPin, Mail, Phone, Clock } from 'lucide-react'
+import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react'
 
 export type Props = {
   blockType: 'contactUs'
@@ -28,7 +28,9 @@ export const ContactUsBlock: React.FC<Props> = () => {
 
         {/* Email */}
         <div className="flex items-start gap-4">
-          <Mail className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
+          <a href="mailto:info@laproductora.com">
+            <Mail className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
+          </a>
           <div>
             <h3 className="text-lg font-medium mb-2">Email Us</h3>
             <div className="space-y-4">
@@ -72,16 +74,6 @@ export const ContactUsBlock: React.FC<Props> = () => {
               Available for production support 24/7 during active shoots
             </p>
           </div>
-        </div>
-
-        {/* GET IN TOUCH Header with Email Link */}
-        <div className="pt-12 text-center">
-          <a
-            href="mailto:info@laproductora.com"
-            className="inline-block text-[5rem] md:text-[8rem] font-bold leading-none tracking-tight hover:text-[#FF4D00] transition-colors duration-300"
-          >
-            GET IN TOUCH
-          </a>
         </div>
       </div>
     </div>

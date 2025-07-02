@@ -52,22 +52,18 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
                 />
               )}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center px-4">
-                <div className="text-white font-semibold text-xl leading-tight">
-                  <p className="uppercase">{commercial.title}</p>
-                  <p className="text-base mt-1">{new Date(commercial.releaseDate).getFullYear()}</p>
-                  <div className="mt-4">
-                    {commercial.client && <p className="text-sm opacity-90">{commercial.client}</p>}
-                    {commercial.description && (
-                      <div className="text-xs mt-2 opacity-75 line-clamp-2">
-                        <RichText
-                          data={commercial.description}
-                          enableGutter={false}
-                          enableProse={false}
-                          className="text-xs"
-                        />
-                      </div>
-                    )}
-                  </div>
+                <div className="text-white flex flex-col items-center w-full">
+                  {commercial.client && (
+                    <p className="text-3xl opacity-90 tracking-wide uppercase font-inter font-[300]">
+                      {commercial.client}
+                    </p>
+                  )}
+                  <p className="uppercase text-7xl leading-tight my-4 font-inter font-[500]">
+                    {commercial.title}
+                  </p>
+                  <p className="text-5xl opacity-90 font-inter font-[100]">
+                    {new Date(commercial.releaseDate).getFullYear()}
+                  </p>
                 </div>
               </div>
             </div>

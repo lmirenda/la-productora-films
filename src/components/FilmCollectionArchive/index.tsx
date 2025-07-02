@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Film } from '@/payload-types'
-import { Media } from '@/components/Media'
-import RichText from '@/components/RichText'
+import Image from 'next/image'
 
 export type Props = {
   films: Film[]
@@ -30,42 +29,44 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
   }, [selectedFilm])
 
   return (
-    <div className="container">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8">
+    <div className="">
+      <div className="grid grid-cols-1 gap-px mx-auto w-full">
         {films?.map((film, index) => {
           const thumbnail = typeof film.thumbnail === 'object' ? film.thumbnail : null
-
+          let src: string
+          if (thumbnail && thumbnail.url) {
+            src = thumbnail.url // TS now knows thumbnail.url is a string
+          } else {
+            src = '/path/to/placeholder.png'
+          }
           return (
             <div
               key={index}
-              className="group relative aspect-[4/5] overflow-hidden rounded-sm cursor-pointer"
+              className="relative w-full aspect-[16/5] cursor-pointer overflow-hidden group"
               onClick={() => setSelectedFilm(film)}
             >
               {thumbnail && (
-                <Media
-                  resource={thumbnail}
-                  className="absolute inset-0 object-cover transition-transform duration-300 group-hover:scale-105"
-                  htmlElement={null}
+                <Image
+                  src={src}
+                  alt={film.title || 'film thumbnail'}
+                  fill
+                  className="object-cover"
                 />
               )}
 
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center px-4">
-                <div className="text-white font-semibold text-xl leading-tight">
-                  <p className="uppercase">{film.title}</p>
-                  <p className="text-base mt-1">{new Date(film.releaseDate).getFullYear()}</p>
-                  <div className="mt-4">
-                    {film.platform && <p className="text-sm opacity-90">{film.platform}</p>}
-                    {film.description && (
-                      <div className="text-xs mt-2 opacity-75 line-clamp-2">
-                        <RichText
-                          data={film.description}
-                          enableGutter={false}
-                          enableProse={false}
-                          className="text-xs"
-                        />
-                      </div>
-                    )}
-                  </div>
+                <div className="text-white flex flex-col items-center w-full">
+                  {film.director && (
+                    <p className="text-3xl opacity-90 tracking-wide uppercase font-inter font-[300]">
+                      {film.director}
+                    </p>
+                  )}
+                  <p className="uppercase text-7xl leading-tight my-4 font-inter font-[500]">
+                    {film.title}
+                  </p>
+                  <p className="text-5xl opacity-90 font-inter font-[100]">
+                    {new Date(film.releaseDate).getFullYear()}
+                  </p>
                 </div>
               </div>
             </div>
