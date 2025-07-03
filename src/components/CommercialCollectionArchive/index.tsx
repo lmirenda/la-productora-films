@@ -40,7 +40,7 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
           return (
             <div
               key={index}
-              className="relative w-full aspect-[16/5] cursor-pointer overflow-hidden group"
+              className="relative w-full aspect-[16/9] sm:aspect-[16/5] cursor-pointer overflow-hidden group"
               onClick={() => setSelectedCommercial(commercial)}
             >
               {thumbnail && (

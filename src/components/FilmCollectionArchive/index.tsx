@@ -42,7 +42,7 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
           return (
             <div
               key={index}
-              className="relative w-full aspect-[16/5] cursor-pointer overflow-hidden group"
+              className="relative w-full aspect-[16/9] sm:aspect-[16/5] cursor-pointer overflow-hidden group"
               onClick={() => setSelectedFilm(film)}
             >
               {thumbnail && (
