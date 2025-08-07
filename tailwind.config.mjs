@@ -95,7 +95,15 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        avenir: [
+          'Inter',
+          'Avenir Next',
+          'Avenir',
+          'Helvetica Neue',
+          'Helvetica',
+          'Arial',
+          'sans-serif',
+        ],
         mono: ['var(--font-geist-mono)'],
         sans: ['var(--font-geist-sans)'],
       },

@@ -42,7 +42,7 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
           return (
             <div
               key={index}
-              className="relative w-full aspect-[16/9] sm:aspect-[16/5] cursor-pointer overflow-hidden group"
+              className="relative w-full aspect-[16/9] sm:aspect-[16/6] cursor-pointer overflow-hidden group"
               onClick={() => setSelectedFilm(film)}
             >
               {thumbnail && (
@@ -57,15 +57,15 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center px-4">
                 <div className="text-white flex flex-col items-center w-full">
                   {film.director && (
-                    <p className="text-base sm:text-lg md:text-2xl opacity-90 tracking-wide uppercase font-inter font-[300]">
-                      {film.director}
+                    <p className="text-base sm:text-lg md:text-[20px] opacity-90 tracking-wide font-avenir font-[300]">
+                      Vergara te lechea
                     </p>
                   )}
-                  <p className="uppercase text-2xl sm:text-4xl md:text-6xl leading-tight my-2 sm:my-4 font-inter font-[500]">
+                  <p className="uppercase text-2xl sm:text-4xl md:text-[32px] leading-tight my-2 sm:my-4 font-avenir font-[500]">
                     {film.title}
                   </p>
-                  <p className="text-lg sm:text-2xl md:text-4xl opacity-90 font-inter font-[100]">
-                    {new Date(film.releaseDate).getFullYear()}
+                  <p className="text-lg sm:text-2xl md:text-[20px] opacity-90 font-avenir font-[100]">
+                    {film?.platform || 'La Productora Films'}
                   </p>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState, useCallback } from 'react'
+import Link from 'next/link'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import type { Page } from '@/payload-types'
 
@@ -92,14 +93,9 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       </div> */}
 
       {/* Bottom right rebate link */}
-      <a
-        href="https://uruguayaudiovisual.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 z-20 text-white px-4 py-2 rounded shadow hover:bg-black/80 transition-colors text-lg pointer-events-auto"
-      >
-        See rebate possibilities
-      </a>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 text-white border border-white rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors cursor-pointer pointer-events-auto">
+        <Link href="/about">See rebate possibilities</Link>
+      </div>
     </div>
   )
 }

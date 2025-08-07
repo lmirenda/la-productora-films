@@ -48,14 +48,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         data-theme={theme ?? undefined}
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm pointer-events-none"
       >
-        <div className="container py-4 flex items-center justify-between pointer-events-auto">
+        <div className="container py-4 flex items-center justify-between pointer-events-auto relative">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0 z-10">
             <Logo loading="eager" priority="high" />
           </Link>
 
-          {/* Desktop navigation */}
-          <div className="hidden md:flex flex-1 justify-center">
+          {/* Desktop navigation - absolutely centered */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
             <HeaderNav data={data} />
           </div>
 
