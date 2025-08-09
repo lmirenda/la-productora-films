@@ -1,5 +1,4 @@
 import React from 'react'
-import { MapPin, Mail, Phone, Clock, Send } from 'lucide-react'
 
 export type Props = {
   blockType: 'contactUs'
@@ -7,76 +6,68 @@ export type Props = {
 
 export const ContactUsBlock: React.FC<Props> = () => {
   return (
-    <div className="w-full bg-black text-white py-4 container">
-      <div className="max-w-4xl space-y-12">
-        {/* Location */}
-        <div className="flex items-start gap-4">
-          <MapPin className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
-          <div>
-            <h3 className="text-lg font-medium mb-2">Our Location</h3>
-            <p className="text-gray-400">
-              WTC Free Zone, Dr. Luis Bonavita 1294, 11300 Montevideo, Uruguay
-            </p>
-            <a
-              href="https://maps.google.com"
-              className="text-[#FF4D00] hover:underline text-sm mt-2 block"
-            >
-              View on Google Maps
-            </a>
-          </div>
-        </div>
+    <section className="bg-black text-white py-16">
+      <div className="max-w-full mx-auto px-12 font-avenir">
+        {/* Section Title */}
+        <h2 className="text-center text-2xl md:text-3xl font-light mb-16 tracking-wide font-avenir-next">
+          MEET OUR TEAM
+        </h2>
 
-        {/* Email */}
-        <div className="flex items-start gap-4">
-          <a href="mailto:info@laproductora.com">
-            <Mail className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
-          </a>
-          <div>
-            <h3 className="text-lg font-medium mb-2">Email Us</h3>
-            <div className="space-y-4">
+        {/* Unified Team Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16">
+          {/* Column 1: LA PRODUCTORA FILMS */}
+          <div className="lg:col-span-2 border-l border-[#8F8F8F] pl-8">
+            <h3 className="text-[16px] font-semibold tracking-wide mb-8">LA PRODUCTORA FILMS</h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Executive Producers */}
               <div>
-                <a href="mailto:info@laproductora.com" className="text-gray-400 hover:text-white">
-                  info@laproductora.com
-                </a>
-                <p className="text-sm text-gray-500">For general inquiries</p>
+                <h4 className="text-[16px] font-medium mb-6 text-gray-300">EXECUTIVE PRODUCERS</h4>
+
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-medium">Pepe Lamboglia</p>
+                    <p className="text-gray-400 text-sm">pepe@laproductorafilms.com</p>
+                  </div>
+
+                  <div>
+                    <p className="font-medium">Jean Paul Bragard</p>
+                    <p className="text-gray-400 text-sm">jp@laproductorafilms.com</p>
+                  </div>
+
+                  <div>
+                    <p className="font-medium">James Lloyd</p>
+                    <p className="text-gray-400 text-sm">james@laproductorafilms.com</p>
+                  </div>
+                </div>
               </div>
+
+              {/* Head Accountant */}
               <div>
-                <a
-                  href="mailto:productions@laproductora.com"
-                  className="text-gray-400 hover:text-white"
-                >
-                  productions@laproductora.com
-                </a>
-                <p className="text-sm text-gray-500">For production-specific inquiries</p>
+                <h4 className="text-[16px] font-medium mb-6 text-gray-300">HEAD ACCOUNTANT</h4>
+
+                <div>
+                  <p className="font-medium">Agustina Orozco</p>
+                  <p className="text-gray-400 text-sm">agustina@laproductorafilms.com</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Call Us */}
-        <div className="flex items-start gap-4">
-          <Phone className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
-          <div>
-            <h3 className="text-lg font-medium mb-2">Call Us</h3>
-            <p className="text-gray-400">+598 2 601 1117</p>
-            <p className="text-sm text-gray-500">Monday to Friday, 9am to 6pm (UYT)</p>
-          </div>
-        </div>
+          {/* Column 3: LA PRODUCTORA IA */}
+          <div className="border-l border-[#8F8F8F] pl-8">
+            <h3 className="text-[16px] font-semibold tracking-wide mb-8">LA PRODUCTORA IA</h3>
 
-        {/* Office Hours */}
-        <div className="flex items-start gap-4">
-          <Clock className="w-6 h-6 text-[#FF4D00] flex-shrink-0 mt-1" />
-          <div>
-            <h3 className="text-lg font-medium mb-2">Office Hours</h3>
-            <p className="text-gray-400">Monday - Friday: 9:00 AM - 6:00 PM (UYT)</p>
-            <p className="text-gray-400">Saturday - Sunday: Closed</p>
-            <p className="text-sm text-gray-500 mt-2">
-              Available for production support 24/7 during active shoots
-            </p>
+            <h4 className="text-[16px] font-medium mb-6 text-gray-300">AI CREATIVE DIRECTOR</h4>
+
+            <div>
+              <p className="font-medium">Rodrigo Méndez</p>
+              <p className="text-gray-400 text-sm">rodrigo@laproductorafilms.com</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
