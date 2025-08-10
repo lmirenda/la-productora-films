@@ -155,7 +155,7 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'videoLoop' | 'noImpact';
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'videoLoop' | 'noImpact' | 'soundVideo';
     richText?: {
       root: {
         type: string;
@@ -210,6 +210,7 @@ export interface Page {
     | CommercialArchiveBlock
     | ContactUsBlock
     | ExpertiseBlock
+    | ArtificialIntelligenceBlock
   )[];
   meta?: {
     title?: string | null;
@@ -923,6 +924,15 @@ export interface ExpertiseBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArtificialIntelligenceBlock".
+ */
+export interface ArtificialIntelligenceBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'artificialIntelligence';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1230,6 +1240,7 @@ export interface PagesSelect<T extends boolean = true> {
         commercialArchive?: T | CommercialArchiveBlockSelect<T>;
         contactUs?: T | ContactUsBlockSelect<T>;
         expertise?: T | ExpertiseBlockSelect<T>;
+        artificialIntelligence?: T | ArtificialIntelligenceBlockSelect<T>;
       };
   meta?:
     | T
@@ -1383,6 +1394,14 @@ export interface ContactUsBlockSelect<T extends boolean = true> {
  * via the `definition` "ExpertiseBlock_select".
  */
 export interface ExpertiseBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArtificialIntelligenceBlock_select".
+ */
+export interface ArtificialIntelligenceBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

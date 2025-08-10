@@ -7,12 +7,14 @@ import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
 import { VideoLoopHero } from './VideoLoop'
 import { NoImpactHero } from './NoImpact'
+import { SoundVideo } from './SoundVideo'
 
 const heroes = {
   highImpact: HighImpactHero,
   lowImpact: LowImpactHero,
   mediumImpact: MediumImpactHero,
   videoLoop: VideoLoopHero,
+  soundVideo: SoundVideo,
   noImpact: NoImpactHero,
 }
 

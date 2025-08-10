@@ -15,6 +15,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { ContactUs } from '@/blocks/ContactUs/config'
+import { ArtificialIntelligence } from '@/blocks/ArtificialIntelligence/config'
 
 import {
   MetaDescriptionField,
@@ -91,6 +92,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 CommercialArchive,
                 ContactUs,
                 Expertise,
+                ArtificialIntelligence,
               ],
               required: true,
               admin: {

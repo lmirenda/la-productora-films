@@ -12,6 +12,7 @@ import { FilmArchiveBlock } from '@/blocks/FilmArchiveBlock/Component'
 import { CommercialArchiveBlock } from '@/blocks/CommercialArchiveBlock/Component'
 import { ContactUsBlock } from '@/blocks/ContactUs/Component'
 import { ExpertiseBlock } from './Expertise/Component'
+import { ArtificialIntelligenceBlock } from './ArtificialIntelligence/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,6 +25,7 @@ const blockComponents = {
   commercialArchive: CommercialArchiveBlock,
   contactUs: ContactUsBlock,
   expertise: ExpertiseBlock,
+  artificialIntelligence: ArtificialIntelligenceBlock,
 }
 
 export const RenderBlocks: React.FC<{

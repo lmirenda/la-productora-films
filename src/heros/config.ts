@@ -43,6 +43,10 @@ export const hero: Field = {
           label: 'No Impact',
           value: 'noImpact',
         },
+        {
+          label: 'AI Video',
+          value: 'soundVideo',
+        },
       ],
       required: true,
     },

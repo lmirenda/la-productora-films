@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export async function Footer() {
   return (
-    <footer className="bg-black text-white py-8 md:py-12">
+    <footer className="bg-black text-white py-8 md:py-12 border-t border-white">
       <div className="w-full mx-auto px-6 md:px-12">
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 md:mb-24">

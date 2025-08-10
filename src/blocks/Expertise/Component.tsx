@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
   return (
     <div className="bg-black text-white py-8 md:py-16 px-4 md:px-8 font-avenir">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto mx-4">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-[465px_1fr] gap-8 md:gap-[120px] mb-8 md:mb-16">
           {/* Left Column */}
