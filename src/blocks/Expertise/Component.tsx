@@ -63,12 +63,11 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
                 making it the perfect setting for your next production.
               </p>
               <p className="text-[14px] md:text-[16px] font-[400] leading-normal text-justify">
-                Situated between Argentina and Brazil, Uruguay combines{' '}
-                <strong>political stability with diverse landscapes</strong> including beaches,
-                countryside, and urban settings.{' '}
+                Situated between Argentina and Brazil, Uruguay is a a vibrant production hub
+                combining political stability with diverse landscapes{' '}
                 <strong>
                   International crews benefit from favorable exchange rates, competitive production
-                  costs, experienced local teams, and access to modern equipment.
+                  costs, experienced local teams, and access to the latest equipment options.
                 </strong>
               </p>
             </div>
@@ -97,8 +96,9 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
                 international standards with unmatched regional expertise.
               </p>
               <p className="text-[14px] md:text-[16px] font-[400] leading-normal text-justify">
-                We <strong>combine deep regional knowledge with global production standards</strong>{' '}
-                - caring about every detail – because we know that great production happens when
+                We{' '}
+                <strong>combine deep local knowledge with wolrd-wide production protocols</strong> -
+                caring about every detail – because we know that great production happens when
                 everything runs smoothly and nothing feels forced.{' '}
                 <strong>From prep to wrap, we focus on what matters most</strong> - creative
                 collaboration, and ensuring your shoot is both efficient and unforgettable.
