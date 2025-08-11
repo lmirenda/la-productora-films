@@ -94,7 +94,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
 
       {/* Bottom right rebate link */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 text-white border border-white rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors cursor-pointer pointer-events-auto">
-        <Link href="/about">See rebate possibilities</Link>
+        <Link href="/about">Cash Rebate Program</Link>
       </div>
     </div>
   )
