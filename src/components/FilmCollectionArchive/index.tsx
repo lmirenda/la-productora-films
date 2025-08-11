@@ -58,7 +58,7 @@ export const FilmCollectionArchive: React.FC<Props> = ({ films }) => {
                 <div className="text-white flex flex-col items-center w-full">
                   {film.director && (
                     <p className="text-base sm:text-lg md:text-[20px] opacity-90 tracking-wide font-avenir font-[300]">
-                      Vergara te lechea
+                      {film?.director}
                     </p>
                   )}
                   <p className="uppercase text-2xl sm:text-4xl md:text-[32px] leading-tight my-2 sm:my-4 font-avenir font-[500]">
