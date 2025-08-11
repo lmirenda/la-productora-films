@@ -60,7 +60,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     }
   }, [setHeaderTheme, updateSize])
 
-  const videoId = 1026527684
+  const videoId = 1108092445
   const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0`
 
   return (

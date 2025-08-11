@@ -32,8 +32,8 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     }
   }, [setHeaderTheme, updateSize])
 
-  const videoId = 1026527684
-  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0`
+  const videoId = 1108093130
+  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0`
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
