@@ -47,7 +47,7 @@ export async function Footer() {
                 <Instagram size={16} className="text-black" />
               </a>
               <a
-                href="https://vimeo.com/laproductorafilms"
+                href="https://www.imdb.com/es-es/search/title/?companies=co0280497"
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center overflow-hidden"
               >
                 <svg
