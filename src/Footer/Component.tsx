@@ -21,9 +21,9 @@ export async function Footer() {
               </Link>
             </div>
             <p className="text-[16px] mb-6">
-              Over 20 years bringing
+              20 years of global production
               <br />
-              Uruguay to the world.
+              services in Uruguay.
             </p>
 
             {/* Social Media Icons */}
@@ -93,7 +93,7 @@ export async function Footer() {
             <div className="flex flex-col space-y-4 md:space-y-6 text-[14px] md:text-[16px]">
               <p>Costa Rica 1651, 11500 Montevideo, Uruguay</p>
               <p>info@laproductorafilms.com</p>
-              <p>+598 93 111 111</p>
+              <p>+(598) 94 843 769</p>
             </div>
           </div>
         </div>
