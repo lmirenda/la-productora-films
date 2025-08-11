@@ -36,7 +36,7 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
                   <Link href="/commercials">Advertising</Link>
                 </button>
                 <button className="border border-white rounded-full px-4 md:px-6 py-2 text-[18px] md:text-[22px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors">
-                  <Link href="/feature-films">Movies & Series</Link>
+                  <Link href="/feature-films">Entertainment</Link>
                 </button>
               </div>
             </div>
