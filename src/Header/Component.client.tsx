@@ -48,7 +48,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         data-theme={theme ?? undefined}
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm pointer-events-none"
       >
-        <div className="container py-4 flex items-center justify-between pointer-events-auto relative">
+        <div className="px-4 md:px-8 py-4 flex items-center justify-between pointer-events-auto relative">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 z-10">
             <Logo loading="eager" priority="high" />
