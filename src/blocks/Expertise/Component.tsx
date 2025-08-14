@@ -33,10 +33,14 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 md:mb-20 mx-24 md:mx-0">
                 <button className="border border-white rounded-full px-4 md:px-6 py-2 text-[24px] md:text-[22px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors">
-                  <Link href="/commercials">Advertising</Link>
+                  <a href="/pdf/advertising.pdf" download="advertising.pdf">
+                    Advertising
+                  </a>
                 </button>
                 <button className="border border-white rounded-full px-4 md:px-6 py-2 text-[24px] md:text-[22px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors">
-                  <Link href="/feature-films">Entertainment</Link>
+                  <a href="/pdf/entertainment.pdf" download="entertaiment.pdf">
+                    Entertainment
+                  </a>
                 </button>
               </div>
             </div>
