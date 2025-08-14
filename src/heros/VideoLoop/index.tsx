@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState, useCallback } from 'react'
-import Link from 'next/link'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import type { Page } from '@/payload-types'
 

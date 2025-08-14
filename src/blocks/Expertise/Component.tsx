@@ -1,6 +1,5 @@
 import React from 'react'
 import { ExpertiseBlock as ExpertiseBlockProps } from '@/payload-types'
-import Link from 'next/link'
 
 export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
   return (

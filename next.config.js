@@ -18,6 +18,28 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      // Allow your production domain for API media routes
+      {
+        protocol: 'https',
+        hostname: 'www.laproductorafilms.com',
+        pathname: '/api/media/file/**',
+      },
+      // Allow Vercel app domain for API media routes
+      {
+        protocol: 'https',
+        hostname: 'la-productora-films.vercel.app',
+        pathname: '/api/media/file/**',
+      },
+      // Allow Vercel Blob Storage (in case direct URLs are used)
+      {
+        protocol: 'https',
+        hostname: '*.vercel-storage.com',
+      },
+      // Allow general blob storage patterns
+      {
+        protocol: 'https',
+        hostname: '*.blob.vercel-storage.com',
+      },
     ],
   },
   webpack: (config, { webpack }) => {
