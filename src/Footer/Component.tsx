@@ -17,7 +17,7 @@ export async function Footer() {
           <div className="md:col-span-2">
             <div className="mb-2">
               <Link href="/" className="flex-shrink-0">
-                <Logo className="text-white w-[200px] md:w-[300px] h-auto" />
+                <Logo className="text-white w-[200px] md:w-[250px] h-auto" />
               </Link>
             </div>
             <p className="text-[16px] mb-6">
@@ -86,11 +86,11 @@ export async function Footer() {
           </div>
 
           {/* Right Section - Contact (spans 1 column on md+) */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 hidden md:block">
             <h3 className="text-[16px] md:text-[18px] uppercase mb-3 font-medium font-avenir">
               CONTACT
             </h3>
-            <div className="flex flex-col space-y-4 md:space-y-6 text-[14px] md:text-[16px]">
+            <div className="flex flex-col space-y-2 md:space-y-4 text-[14px] md:text-[14px]">
               <p>Costa Rica 1651, 11500 Montevideo, Uruguay</p>
               <p>info@laproductorafilms.com</p>
               <p>+(598) 94 843 769</p>

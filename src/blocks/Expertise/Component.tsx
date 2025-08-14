@@ -31,7 +31,7 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
                 Additionally, services are exempt from VAT, making Uruguay not only creatively
                 diverse but also financially strategic for your next shoot.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 md:mb-20">
                 <button className="border border-white rounded-full px-4 md:px-6 py-2 text-[18px] md:text-[22px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors">
                   <Link href="/commercials">Advertising</Link>
                 </button>
@@ -56,7 +56,7 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
           {/* Right Column */}
           <div>
             <div className="border-t border-white w-full mb-6 md:mb-8"></div>
-            <div>
+            <div className="md:mb-20">
               <p className="text-[14px] md:text-[16px] font-[400] leading-normal text-justify mb-3 md:mb-4">
                 Safe, stable, and strategically located, it offers a variety of{' '}
                 <strong>unique locations, reliable logistics, and cost-effective services</strong> -
@@ -87,7 +87,7 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
           {/* Right Column */}
           <div>
             <div className="border-t border-white w-full mb-6 md:mb-8"></div>
-            <div>
+            <div className="md:mb-20">
               <p className="text-[14px] md:text-[16px] font-[400] leading-normal text-justify mb-3 md:mb-4">
                 We provide <strong>full production support for all types of media</strong> from
                 commercials to features, digital content, and beyond. Our{' '}

@@ -59,7 +59,7 @@ export const AdminBar: React.FC<{
 
   return (
     <div
-      className={cn(baseClass, 'py-1 text-white border-b border-white/20 backdrop-blur-sm', {
+      className={cn(baseClass, 'py-1 text-white border-t border-white/20 backdrop-blur-sm', {
         block: show,
         hidden: !show,
       })}

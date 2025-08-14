@@ -53,16 +53,16 @@ export const CommercialCollectionArchive: React.FC<Props> = ({ commercials }) =>
               )}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-center px-4">
                 <div className="text-white flex flex-col items-center w-full">
-                  {commercial.client && (
-                    <p className="text-base sm:text-lg md:text-[18px] opacity-90 tracking-wide uppercase font-avenir font-[300]">
-                      {commercial.client}
+                  {commercial.director && (
+                    <p className="text-base sm:text-lg md:text-[18px] opacity-90 tracking-wide font-avenir font-[300]">
+                      {commercial.director}
                     </p>
                   )}
                   <p className="uppercase text-2xl sm:text-4xl md:text-[32px] leading-tight my-2 sm:my-4 font-avenir font-[500]">
                     {commercial.title}
                   </p>
                   <p className="text-lg sm:text-2xl md:text-[18px] opacity-90 font-avenir font-[100]">
-                    {new Date(commercial.releaseDate).getFullYear()}
+                    {commercial.client}
                   </p>
                 </div>
               </div>

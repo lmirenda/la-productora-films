@@ -27,8 +27,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
+          <Header />
+          <main className={cn('relative z-0', isEnabled && 'pb-[var(--admin-bar-height)]')}>
+            {children}
+          </main>
+          <Footer />
+
           {isEnabled && (
-            <div className="fixed top-0 left-0 right-0 z-50">
+            <div className="fixed bottom-0 left-0 right-0 z-[9999]">
               <AdminBar
                 adminBarProps={{
                   preview: isEnabled,
@@ -36,12 +42,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               />
             </div>
           )}
-
-          <Header />
-          <main className={cn('relative z-0', isEnabled && 'pt-[var(--admin-bar-height)]')}>
-            {children}
-          </main>
-          <Footer />
         </Providers>
       </body>
     </html>

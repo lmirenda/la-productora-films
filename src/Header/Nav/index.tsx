@@ -52,7 +52,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, isMobile = false }) 
               key={i}
               {...link}
               appearance="link"
-              className={`font-inter uppercase tracking-wider text-[20px] text-white hover:text-white/80 transition-colors ${
+              className={`font-avenir uppercase tracking-wider text-[20px] text-white hover:text-white/80 transition-colors ${
                 isActive ? 'underline underline-offset-4' : ''
               }`}
             />
@@ -72,7 +72,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ data, isMobile = false }) 
               key={i}
               {...link}
               appearance="link"
-              className={`font-inter uppercase tracking-wider text-sm hover:text-white/80 transition-colors ${
+              className={`font-avenir uppercase tracking-wider text-sm hover:text-white/80 transition-colors ${
                 isActive ? 'underline underline-offset-4' : ''
               }`}
             />

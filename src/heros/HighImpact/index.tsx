@@ -25,7 +25,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
       {/* Content */}
       <div className="container relative z-[2] flex flex-col items-center text-center px-4 pt-4 min-h-[80vh] font-avenir">
         <div className="flex-1 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-4xl font-regular mb-8 max-w-4xl mx-auto">{title}</h1>
+          <h1 className="text-4xl md:text-4xl font-regular max-w-4xl mx-auto pt-12">{title}</h1>
 
           {richText && (
             <div className="max-w-[450px] mx-auto text-lg md:text-xl font-semibold text-center">
