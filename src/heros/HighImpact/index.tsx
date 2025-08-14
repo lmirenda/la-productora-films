@@ -6,6 +6,7 @@ import type { Page } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import Image from 'next/image'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText, sponsors }) => {
   const { setHeaderTheme } = useHeaderTheme()
@@ -34,19 +35,25 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
           )}
         </div>
 
-        {Array.isArray(sponsors) && sponsors.length > 0 && (
-          <div className="pb-2">
-            <ul className="flex justify-center gap-2 md:gap-4 flex-wrap">
-              {sponsors.map((sponsor, i) => {
-                return (
-                  <div key={i} className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24">
-                    <Media resource={sponsor} />
-                  </div>
-                )
-              })}
-            </ul>
-          </div>
-        )}
+        <div className="pb-2 ">
+          {Array.isArray(sponsors) && sponsors.length > 0 && (
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5 pb-4">
+              {sponsors.map((sponsor, i) => (
+                <div key={i}>
+                  {typeof sponsor === 'object' && 'url' in sponsor && sponsor.url ? (
+                    <Image
+                      src={sponsor.url}
+                      className="block h-6 md:h-8 w-auto object-contain"
+                      alt={sponsor.alt || ''}
+                      width={100}
+                      height={100}
+                    />
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Background image */}
