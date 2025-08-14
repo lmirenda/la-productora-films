@@ -4,16 +4,16 @@ import Image from 'next/image'
 
 export const ArtificialIntelligenceBlock: React.FC<ArtificialIntelligenceBlockProps> = () => {
   return (
-    <section className="relative text-white overflow-hidden md:py-2 font-avenir mb-20">
+    <section className="relative text-white overflow-hidden md:py-2 font-avenir md:mb-20 sm:mb-2">
       {/* Three decorative images: one top, two near bottom sides */}
       <div className="pointer-events-none select-none" aria-hidden>
         {/* bottom left */}
-        <div className="hidden md:block absolute bottom-20 left-[-5%] translate-y-[100px]">
+        <div className="hidden xl:block absolute bottom-20 left-[-5%] translate-y-[100px]">
           <Image src="/images/left.png" alt="" width={630} height={420} />
         </div>
 
         {/* bottom right */}
-        <div className="hidden md:block absolute bottom-10 right-[-5%]">
+        <div className="hidden xl:block absolute bottom-10 right-[-5%]">
           <Image src="/images/right.png" alt="" width={630} height={420} />
         </div>
       </div>
@@ -57,6 +57,23 @@ export const ArtificialIntelligenceBlock: React.FC<ArtificialIntelligenceBlockPr
             <span className="tracking-wide text-lg md:text-xl font-semibold text-emerald-400">
               AI
             </span>
+          </div>
+          {/* Images for devices smaller than xl */}
+          <div className="xl:hidden relative mt-8 mx-4">
+            <div className="relative">
+              {/* Left image - positioned higher */}
+              <div className="absolute left-[-30%] top-0 ">
+                <Image src="/images/left.png" alt="" width={630} height={420} />
+              </div>
+
+              {/* Right image - positioned 100px lower */}
+              <div className="absolute right-[-30%] top-[100px]">
+                <Image src="/images/right.png" alt="" width={630} height={420} />
+              </div>
+
+              {/* Spacer to maintain layout */}
+              <div className="h-[500px]"></div>
+            </div>
           </div>
         </div>
       </div>
