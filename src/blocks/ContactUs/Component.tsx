@@ -7,12 +7,7 @@ export type Props = {
 export const ContactUsBlock: React.FC<Props> = () => {
   return (
     <section className="bg-black text-white py-16 ">
-      <div className="max-w-full mx-auto px-6 md:px-12 font-avenir">
-        {/* Section Title */}
-        <h2 className="text-center text-2xl md:text-3xl font-light mb-16 tracking-wide font-avenir-next">
-          MEET OUR TEAM
-        </h2>
-
+      <div className="max-w-full mx-auto px-6 md:px-8 md:pt-16 font-avenir">
         {/* Unified Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-8 lg:gap-16">
           {/* Column 1: LA PRODUCTORA FILMS */}

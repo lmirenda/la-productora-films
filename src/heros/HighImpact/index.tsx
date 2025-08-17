@@ -24,18 +24,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
       {/* Content */}
-      <div className="container relative z-[2] flex flex-col items-center text-center px-4 pt-4 min-h-[80vh] font-avenir">
+      <div className="container relative z-[2] flex flex-col items-center text-center px-4 pt-12 min-h-[80vh] font-avenir">
         <div className="flex-1 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-4xl font-regular max-w-4xl mx-auto pt-12">{title}</h1>
-
-          {richText && (
-            <div className="max-w-[450px] mx-auto text-lg md:text-xl font-semibold text-center">
-              <RichText data={richText} enableGutter={false} />
-            </div>
-          )}
+          <h1 className="text-white text-2xl md:text-[36px] lg:text-[46px] font-[500] text-center">
+            {title}
+          </h1>
         </div>
 
-        <div className="pb-2 ">
+        {/* <div className="pb-2 ">
           {Array.isArray(sponsors) && sponsors.length > 0 && (
             <div className="flex flex-wrap items-center justify-center gap-3 md:gap-5 pb-4">
               {sponsors.map((sponsor, i) => (
@@ -53,6 +49,21 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
               ))}
             </div>
           )}
+        </div> */}
+        <div className="pb-2 hidden md:block mx-auto">
+          <Image
+            src={
+              typeof sponsors?.[0] === 'object' &&
+              sponsors?.[0] !== null &&
+              'url' in sponsors[0] &&
+              sponsors[0].url
+                ? sponsors[0].url
+                : '/images/logos.png'
+            }
+            alt="High Impact"
+            width={1200}
+            height={200}
+          />
         </div>
       </div>
 

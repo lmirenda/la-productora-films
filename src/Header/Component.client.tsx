@@ -48,14 +48,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         data-theme={theme ?? undefined}
         className="fixed top-0 left-0 right-0 z-50 pointer-events-none font-avenir"
       >
-        <div className="px-4 md:px-8 py-4 flex items-center justify-between pointer-events-auto relative">
+        <div className="px-4 lg:px-8 py-4 flex items-center justify-between pointer-events-auto relative">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 z-10">
             <Logo loading="eager" priority="high" />
           </Link>
 
           {/* Desktop navigation - absolutely centered */}
-          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
             <HeaderNav data={data} />
           </div>
 
@@ -63,13 +63,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           <button
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
-            className="md:hidden flex-shrink-0 p-2 text-white hover:text-white/80 transition-colors z-50"
+            className="lg:hidden flex-shrink-0 p-2 text-white hover:text-white/80 transition-colors z-50"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Filler to balance desktop layout */}
-          <div className="hidden md:block flex-shrink-0 w-[100px]" />
+          <div className="hidden lg:block flex-shrink-0 w-[100px]" />
         </div>
       </header>
 

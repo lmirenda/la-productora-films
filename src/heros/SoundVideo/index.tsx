@@ -32,7 +32,7 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     }
   }, [setHeaderTheme, updateSize])
 
-  const videoId = 1108093130
+  const videoId = 1110576918
   const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0`
 
   return (
@@ -57,8 +57,9 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
         }}
       />
       <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 font-avenir-next">
-        <h1 className="text-white text-5xl md:text-[46px] font-[500] text-center">
-          AI-powered. Emotion-driven.
+        <h1 className="text-white text-2xl md:text-[46px] font-[500] text-center">
+          AI-powered. <br className="block md:hidden" />
+          Emotion-driven.
         </h1>
       </div>
     </div>

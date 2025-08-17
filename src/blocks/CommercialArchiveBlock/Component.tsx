@@ -1,19 +1,25 @@
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import type { CommercialArchiveBlock as CommercialArchiveBlockProps, Commercial } from '@/payload-types'
+import type {
+  CommercialArchiveBlock as CommercialArchiveBlockProps,
+  Commercial,
+} from '@/payload-types'
 import { CommercialCollectionArchive } from '@/components/CommercialCollectionArchive'
 
-export const CommercialArchiveBlock = async ({ id, selectedCommercials }: CommercialArchiveBlockProps) => {
+export const CommercialArchiveBlock = async ({
+  id,
+  selectedCommercials,
+}: CommercialArchiveBlockProps) => {
   const payload = await getPayload({ config: configPromise })
 
   const commercialIDs = Array.isArray(selectedCommercials)
     ? selectedCommercials
-      .map((entry) => {
-        if (typeof entry?.commercial === 'object') return entry.commercial.id
-        if (typeof entry?.commercial === 'number') return entry.commercial
-        return null
-      })
-      .filter(Boolean)
+        .map((entry) => {
+          if (typeof entry?.commercial === 'object') return entry.commercial.id
+          if (typeof entry?.commercial === 'number') return entry.commercial
+          return null
+        })
+        .filter(Boolean)
     : []
 
   let commercials: Commercial[] = []
@@ -31,14 +37,16 @@ export const CommercialArchiveBlock = async ({ id, selectedCommercials }: Commer
     })
 
     // preserve the manual order
-    const commercialMap = new Map(response.docs.map(commercial => [commercial.id, commercial]))
-    commercials = commercialIDs.filter((id): id is number => id !== null)
-      .map(id => commercialMap.get(id)!)
-      .filter(Boolean) as Commercial[];  }
+    const commercialMap = new Map(response.docs.map((commercial) => [commercial.id, commercial]))
+    commercials = commercialIDs
+      .filter((id): id is number => id !== null)
+      .map((id) => commercialMap.get(id)!)
+      .filter(Boolean) as Commercial[]
+  }
 
   console.log(commercials)
   return (
-    <div className="pt-4" id={`block-${id}`}>
+    <div className="lg:pt-1 pt-[10px]" id={`block-${id}`}>
       {/*{introContent && (*/}
       {/*  <div className="container mb-16">*/}
       {/*    <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />*/}

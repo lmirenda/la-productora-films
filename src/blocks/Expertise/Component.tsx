@@ -31,16 +31,16 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
                 diverse but also financially strategic for your next shoot.
               </p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 lg:mb-20 mx-12 lg:mx-0">
-                <button className="border border-white rounded-full px-4 lg:px-6 py-2 text-[16px] lg:text-[18px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors max-w-[350px] mx-auto w-full">
-                  <a href="/pdf/advertising.pdf" download="advertising.pdf">
+                <a href="/pdf/advertising.pdf" download="advertising.pdf">
+                  <button className="border border-white rounded-full px-4 lg:px-6 py-2 text-[16px] lg:text-[18px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors max-w-[350px] mx-auto w-full">
                     Advertising
-                  </a>
-                </button>
-                <button className="border border-white rounded-full px-4 lg:px-6 py-2 text-[16px] lg:text-[18px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors max-w-[350px] mx-auto w-full">
-                  <a href="/pdf/entertainment.pdf" download="entertaiment.pdf">
+                  </button>
+                </a>
+                <a href="/pdf/entertainment.pdf" download="entertaiment.pdf">
+                  <button className="border border-white rounded-full px-4 lg:px-6 py-2 text-[16px] lg:text-[18px] font-[600] leading-normal hover:bg-white hover:text-black transition-colors max-w-[350px] mx-auto w-full">
                     Entertainment
-                  </a>
-                </button>
+                  </button>
+                </a>
               </div>
             </div>
           </div>

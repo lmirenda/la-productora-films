@@ -25,10 +25,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         <Providers>
           <Header />
-          <main className={cn('relative z-0', isEnabled && 'pb-[var(--admin-bar-height)]')}>
+          <main className={cn('relative z-0 flex-1', isEnabled && 'pb-[var(--admin-bar-height)]')}>
             {children}
           </main>
           <Footer />
