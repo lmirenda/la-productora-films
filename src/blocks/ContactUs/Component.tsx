@@ -16,9 +16,9 @@ export const ContactUsBlock: React.FC<Props> = () => {
               LA PRODUCTORA FILMS
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 lg:mr-48">
               {/* Executive Producers */}
-              <div>
+              <div className="">
                 <h4 className="text-[16px] font-medium mb-6 text-gray-300">EXECUTIVE PRODUCERS</h4>
 
                 <div className="space-y-4">
@@ -40,7 +40,7 @@ export const ContactUsBlock: React.FC<Props> = () => {
               </div>
 
               {/* Head Accountant */}
-              <div>
+              <div className="">
                 <h4 className="text-[16px] font-medium mb-6 text-gray-300">HEAD ACCOUNTANT</h4>
 
                 <div>
