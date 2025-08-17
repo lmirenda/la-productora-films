@@ -4,7 +4,7 @@ import type { Footer } from '@/payload-types'
 
 export async function Footer() {
   return (
-    <footer className="bg-black text-white py-8 md:pb-8 md:pt-0 border-t border-white">
+    <footer className="bg-black text-white py-8 md:pb-8 md:pt-0">
       <div className="w-full mx-auto px-6 md:px-12">
         {/* Main Content Grid */}
         {/* commented out */}
