@@ -24,8 +24,8 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
       <div className="absolute inset-0 bg-black/50 z-[1]" />
 
       {/* Content */}
-      <div className="container relative z-[2] flex flex-col items-center text-center px-4 pt-12 min-h-[80vh] font-avenir">
-        <div className="flex-1 flex flex-col items-center justify-center">
+      <div className=" relative z-[2] flex flex-col items-center text-center pt-12 min-h-[80vh] font-aveni w-full ">
+        <div className="flex-1 flex flex-col items-center justify-center px-4 lg:px-12">
           <h1 className="text-white text-2xl md:text-[36px] lg:text-[46px] font-[500] text-center">
             {title}
           </h1>
@@ -50,7 +50,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
             </div>
           )}
         </div> */}
-        <div className="pb-2 hidden md:block mx-auto">
+        <div className="pb-2 hidden md:block mx-auto w-full lg:px-20 px-8 ">
           <Image
             src={
               typeof sponsors?.[0] === 'object' &&
@@ -61,8 +61,9 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ title, media, richText,
                 : '/images/logos.png'
             }
             alt="High Impact"
-            width={1200}
+            width={2200}
             height={200}
+            className="w-full"
           />
         </div>
       </div>
