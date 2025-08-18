@@ -3,32 +3,37 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import type { Page } from '@/payload-types'
 
-const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
-  const [displayText, setDisplayText] = useState('')
-  const [currentIndex, setCurrentIndex] = useState(0)
+// const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
+//   const [displayText, setDisplayText] = useState('')
+//   const [currentIndex, setCurrentIndex] = useState(0)
 
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText((prev) => prev + text[currentIndex])
-        setCurrentIndex((prev) => prev + 1)
-      }, 80) // about 100 WPM typing speed
+//   useEffect(() => {
+//     if (currentIndex < text.length) {
+//       const timeout = setTimeout(() => {
+//         setDisplayText((prev) => prev + text[currentIndex])
+//         setCurrentIndex((prev) => prev + 1)
+//       }, 80) // about 100 WPM typing speed
 
-      return () => clearTimeout(timeout)
-    }
-  }, [currentIndex, text])
+//       return () => clearTimeout(timeout)
+//     }
+//   }, [currentIndex, text])
 
-  return (
-    <span className="inline-block">
-      {displayText}
-      {currentIndex < text.length && <span className="animate-blink">|</span>}
-    </span>
-  )
-}
+//   return (
+//     <span className="inline-block">
+//       {displayText}
+//       {currentIndex < text.length && <span className="animate-blink">|</span>}
+//     </span>
+//   )
+// }
 
 export const VideoLoopHero: React.FC<Page['hero']> = () => {
   const { setHeaderTheme } = useHeaderTheme()
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [isMobile, setIsMobile] = useState(false)
+  const [_videoLoaded, setVideoLoaded] = useState(false)
+  const [playbackFailed, setPlaybackFailed] = useState(false)
+  const [userInteracted, setUserInteracted] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const updateSize = useCallback(() => {
     const vw = window.innerWidth
@@ -50,6 +55,17 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     document.documentElement.style.overflow = 'hidden'
     document.body.style.overflow = 'hidden'
 
+    // Detect mobile device
+    const checkMobile = () => {
+      const userAgent =
+        navigator.userAgent ||
+        navigator.vendor ||
+        (window as typeof window & { opera?: string }).opera ||
+        ''
+      return /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+    }
+    setIsMobile(checkMobile())
+
     updateSize()
     window.addEventListener('resize', updateSize)
     return () => {
@@ -60,7 +76,33 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
   }, [setHeaderTheme, updateSize])
 
   const videoId = 1110049044
-  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0`
+  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+
+  const handleIframeLoad = () => {
+    setIsLoading(false)
+    setVideoLoaded(true)
+
+    // On mobile, check if video is actually playing after a delay
+    if (isMobile) {
+      setTimeout(() => {
+        // If still no user interaction and we're on mobile, assume autoplay failed
+        if (!userInteracted) {
+          setPlaybackFailed(true)
+        }
+      }, 3000)
+    }
+  }
+
+  const handlePlayClick = () => {
+    setUserInteracted(true)
+    setPlaybackFailed(false)
+
+    // Force video to play by reloading iframe with autoplay
+    const iframe = document.querySelector('iframe[title="Background Video"]') as HTMLIFrameElement
+    if (iframe) {
+      iframe.src = iframe.src
+    }
+  }
 
   return (
     <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
@@ -71,9 +113,10 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       <iframe
         src={videoSrc}
         frameBorder="0"
-        allow="autoplay; fullscreen"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer"
         allowFullScreen
         title="Background Video"
+        onLoad={handleIframeLoad}
         style={{
           position: 'absolute',
           top: '50%',
@@ -81,8 +124,30 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
           width: `${size.width}px`,
           height: `${size.height}px`,
           transform: 'translate(-50%, -50%)',
+          opacity: isLoading ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out',
         }}
       />
+
+      {/* Loading indicator */}
+      {isLoading && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black">
+          <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
+      {/* Mobile play button overlay */}
+      {isMobile && playbackFailed && !userInteracted && (
+        <button
+          onClick={handlePlayClick}
+          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 text-white border-2 border-white rounded-full p-2 hover:bg-white hover:text-black transition-colors cursor-pointer pointer-events-auto"
+          aria-label="Play video"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" />
+          </svg>
+        </button>
+      )}
 
       {/* Overlayed text */}
       {/* <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30">
