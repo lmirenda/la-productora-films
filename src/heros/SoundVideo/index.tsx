@@ -6,6 +6,11 @@ import type { Page } from '@/payload-types'
 export const SoundVideo: React.FC<Page['hero']> = () => {
   const { setHeaderTheme } = useHeaderTheme()
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
+  const [isMobile, setIsMobile] = useState(false)
+  const [_videoLoaded, setVideoLoaded] = useState(false)
+  const [playbackFailed, setPlaybackFailed] = useState(false)
+  const [userInteracted, setUserInteracted] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   const updateSize = useCallback(() => {
     const vw = window.innerWidth
@@ -25,6 +30,17 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
   useEffect(() => {
     setHeaderTheme('dark')
 
+    // Detect mobile device
+    const checkMobile = () => {
+      const userAgent =
+        navigator.userAgent ||
+        navigator.vendor ||
+        (window as typeof window & { opera?: string }).opera ||
+        ''
+      return /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+    }
+    setIsMobile(checkMobile())
+
     updateSize()
     window.addEventListener('resize', updateSize)
     return () => {
@@ -33,7 +49,33 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
   }, [setHeaderTheme, updateSize])
 
   const videoId = 1110576918
-  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0`
+  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+
+  const handleIframeLoad = () => {
+    setIsLoading(false)
+    setVideoLoaded(true)
+
+    // On mobile, check if video is actually playing after a delay
+    if (isMobile) {
+      setTimeout(() => {
+        // If still no user interaction and we're on mobile, assume autoplay failed
+        if (!userInteracted) {
+          setPlaybackFailed(true)
+        }
+      }, 3000)
+    }
+  }
+
+  const handlePlayClick = () => {
+    setUserInteracted(true)
+    setPlaybackFailed(false)
+
+    // Force video to play by reloading iframe with autoplay
+    const iframe = document.querySelector('iframe[title="Background Video"]') as HTMLIFrameElement
+    if (iframe) {
+      iframe.src = iframe.src
+    }
+  }
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
@@ -43,9 +85,10 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
       <iframe
         src={videoSrc}
         frameBorder="0"
-        allow="autoplay; fullscreen"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer"
         allowFullScreen
         title="Background Video"
+        onLoad={handleIframeLoad}
         style={{
           position: 'absolute',
           top: '50%',
@@ -54,8 +97,11 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
           height: `${size.height}px`,
           transform: 'translate(-50%, -50%)',
           pointerEvents: 'none',
+          opacity: isLoading ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out',
         }}
       />
+
       <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 font-avenir-next">
         <h1 className="text-white text-2xl md:text-[46px] font-[500] text-center">
           AI-powered. <br className="block md:hidden" />
