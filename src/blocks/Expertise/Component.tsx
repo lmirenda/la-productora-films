@@ -67,10 +67,10 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
               </p>
               <p className="text-[14px] lg:text-[16px] font-[400] leading-normal text-justify">
                 Situated between Argentina and Brazil, Uruguay is a a vibrant production hub
-                combining political stability with diverse landscapes{' '}
+                combining political stability with diverse landscapes.{' '}
                 <strong>
                   International crews benefit from favorable exchange rates, competitive production
-                  costs, experienced local teams, and access to the latest equipment options.
+                  costs, experienced local teams and access to the latest equipment options.
                 </strong>
               </p>
             </div>
@@ -100,7 +100,7 @@ export const ExpertiseBlock: React.FC<ExpertiseBlockProps> = () => {
               </p>
               <p className="text-[14px] lg:text-[16px] font-[400] leading-normal text-justify">
                 We{' '}
-                <strong>combine deep local knowledge with wolrd-wide production protocols</strong> -
+                <strong>combine deep local knowledge with world-wide production protocols</strong> -
                 caring about every detail – because we know that great production happens when
                 everything runs smoothly and nothing feels forced.{' '}
                 <strong>From prep to wrap, we focus on what matters most</strong> - creative

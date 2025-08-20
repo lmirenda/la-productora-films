@@ -6,9 +6,9 @@ import type { Page } from '@/payload-types'
 export const SoundVideo: React.FC<Page['hero']> = () => {
   const { setHeaderTheme } = useHeaderTheme()
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
-  const [isMobile, setIsMobile] = useState(false)
+  const [useNarrowVideo, setUseNarrowVideo] = useState(false)
   const [_videoLoaded, setVideoLoaded] = useState(false)
-  const [playbackFailed, setPlaybackFailed] = useState(false)
+  const [_playbackFailed, setPlaybackFailed] = useState(false)
   const [userInteracted, setUserInteracted] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -27,19 +27,27 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     }
   }, [])
 
+  // Check aspect ratio and set video type
+  useEffect(() => {
+    const checkAspectRatio = () => {
+      const vw = window.innerWidth
+      const vh = window.innerHeight
+      const viewportRatio = vw / vh
+      const narrowThreshold = 0.9 // use narrow video if aspect ratio is this or narrower
+
+      setUseNarrowVideo(viewportRatio <= narrowThreshold)
+    }
+
+    checkAspectRatio()
+    window.addEventListener('resize', checkAspectRatio)
+
+    return () => {
+      window.removeEventListener('resize', checkAspectRatio)
+    }
+  }, [])
+
   useEffect(() => {
     setHeaderTheme('dark')
-
-    // Detect mobile device
-    const checkMobile = () => {
-      const userAgent =
-        navigator.userAgent ||
-        navigator.vendor ||
-        (window as typeof window & { opera?: string }).opera ||
-        ''
-      return /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
-    }
-    setIsMobile(checkMobile())
 
     updateSize()
     window.addEventListener('resize', updateSize)
@@ -49,17 +57,17 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
   }, [setHeaderTheme, updateSize])
 
   const videoId = 1110576918
-  const mobileVideoId = 1111720577
-  const videoSrc = `https://player.vimeo.com/video/${isMobile ? mobileVideoId : videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+  const narrowVideoId = 1111772053
+  const videoSrc = `https://player.vimeo.com/video/${useNarrowVideo ? narrowVideoId : videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
 
   const handleIframeLoad = () => {
     setIsLoading(false)
     setVideoLoaded(true)
 
-    // On mobile, check if video is actually playing after a delay
-    if (isMobile) {
+    // Check if video is actually playing after a delay for narrow viewports
+    if (useNarrowVideo) {
       setTimeout(() => {
-        // If still no user interaction and we're on mobile, assume autoplay failed
+        // If still no user interaction and we're using narrow video, assume autoplay failed
         if (!userInteracted) {
           setPlaybackFailed(true)
         }
@@ -67,7 +75,7 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     }
   }
 
-  const handlePlayClick = () => {
+  const _handlePlayClick = () => {
     setUserInteracted(true)
     setPlaybackFailed(false)
 
