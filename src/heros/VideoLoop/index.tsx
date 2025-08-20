@@ -75,8 +75,9 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     }
   }, [setHeaderTheme, updateSize])
 
-  const videoId = 1110049044
-  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+  const videoId = 1111399818
+  const mobileVideoId = 1111717459
+  const videoSrc = `https://player.vimeo.com/video/${isMobile ? videoId : mobileVideoId}?background=1&autoplay=1&loop=1&muted=1&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
 
   const handleIframeLoad = () => {
     setIsLoading(false)
@@ -90,17 +91,6 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
           setPlaybackFailed(true)
         }
       }, 3000)
-    }
-  }
-
-  const handlePlayClick = () => {
-    setUserInteracted(true)
-    setPlaybackFailed(false)
-
-    // Force video to play by reloading iframe with autoplay
-    const iframe = document.querySelector('iframe[title="Background Video"]') as HTMLIFrameElement
-    if (iframe) {
-      iframe.src = iframe.src
     }
   }
 
