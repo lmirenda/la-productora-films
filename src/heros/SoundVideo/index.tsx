@@ -49,7 +49,8 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
   }, [setHeaderTheme, updateSize])
 
   const videoId = 1110576918
-  const videoSrc = `https://player.vimeo.com/video/${videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+  const mobileVideoId = 1111720577
+  const videoSrc = `https://player.vimeo.com/video/${isMobile ? mobileVideoId : videoId}?background=1&autoplay=1&loop=1&muted=0&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
 
   const handleIframeLoad = () => {
     setIsLoading(false)

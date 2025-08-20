@@ -76,8 +76,8 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
   }, [setHeaderTheme, updateSize])
 
   const videoId = 1111399818
-  const mobileVideoId = 1111717459
-  const videoSrc = `https://player.vimeo.com/video/${isMobile ? videoId : mobileVideoId}?background=1&autoplay=1&loop=1&muted=1&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
+  const mobileVideoId = 1111401267
+  const videoSrc = `https://player.vimeo.com/video/${isMobile ? mobileVideoId : videoId}?background=1&autoplay=1&loop=1&muted=1&controls=0&playsinline=1&quality=auto&responsive=1&title=0&byline=0&portrait=0`
 
   const handleIframeLoad = () => {
     setIsLoading(false)
