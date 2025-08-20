@@ -7,6 +7,15 @@ declare global {
       VERCEL_PROJECT_PRODUCTION_URL: string
     }
   }
+
+  interface Window {
+    visualViewport?: {
+      height: number
+      width: number
+      addEventListener(type: 'resize', listener: () => void): void
+      removeEventListener(type: 'resize', listener: () => void): void
+    }
+  }
 }
 
 // If this file has no import/export statements (i.e. is a script)
