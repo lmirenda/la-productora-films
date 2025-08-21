@@ -50,12 +50,23 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  description:
+    '20 years of global production services in Uruguay. Full support for commercials, features, and digital content with international standards and local expertise.',
+
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  alternates: {
+    canonical: '/',
+  },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
     creator: '@laproductorafilms',
     description:
       '20 years of global production services in Uruguay. Full support for commercials, features, and digital content with international standards and local expertise.',
-    images: [`${getServerSideURL()}/images/twitter-image.png`],
+    images: [`${getServerSideURL()}/twitter-image.png`],
   },
 }
