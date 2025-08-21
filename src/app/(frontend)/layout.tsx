@@ -53,6 +53,8 @@ export const metadata: Metadata = {
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    creator: '@laproductorafilms',
+    description:
+      'We create high-quality productions, commercials, and storytelling projects with a creative edge.',
   },
 }
