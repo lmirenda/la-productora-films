@@ -24,17 +24,32 @@ export const ContactUsBlock: React.FC<Props> = () => {
                 <div className="space-y-4">
                   <div>
                     <p className="font-medium">Pepe Lamboglia</p>
-                    <p className="text-gray-400 text-sm">pepe@laproductorafilms.com</p>
+                    <a
+                      href="mailto:pepe@laproductorafilms.com"
+                      className="text-gray-400 text-sm hover:underline hover:text-gray transition"
+                    >
+                      pepe@laproductorafilms.com
+                    </a>
                   </div>
 
                   <div>
                     <p className="font-medium">Jean Paul Bragard</p>
-                    <p className="text-gray-400 text-sm">jp@laproductorafilms.com</p>
+                    <a
+                      href="mailto:jp@laproductorafilms.com"
+                      className="text-gray-400 text-sm hover:underline hover:text-gray transition"
+                    >
+                      jp@laproductorafilms.com
+                    </a>
                   </div>
 
                   <div>
                     <p className="font-medium">James Lloyd</p>
-                    <p className="text-gray-400 text-sm">james@laproductorafilms.com</p>
+                    <a
+                      href="mailto:james@laproductorafilms.com"
+                      className="text-gray-400 text-sm hover:underline hover:text-gray transition"
+                    >
+                      james@laproductorafilms.com
+                    </a>
                   </div>
                 </div>
               </div>
@@ -45,7 +60,12 @@ export const ContactUsBlock: React.FC<Props> = () => {
 
                 <div>
                   <p className="font-medium">Agustina Orozco</p>
-                  <p className="text-gray-400 text-sm">agustina@laproductorafilms.com</p>
+                  <a
+                    href="mailto:agustina@laproductorafilms.com"
+                    className="text-gray-400 text-sm hover:underline hover:text-gray transition"
+                  >
+                    agustina@laproductorafilms.com
+                  </a>
                 </div>
               </div>
             </div>
@@ -61,7 +81,12 @@ export const ContactUsBlock: React.FC<Props> = () => {
 
             <div>
               <p className="font-medium">Rodrigo Méndez</p>
-              <p className="text-gray-400 text-sm">rodrigo@laproductorafilms.com</p>
+              <a
+                href="mailto:rodrigo@laproductorafilms.com"
+                className="text-gray-400 text-sm hover:underline hover:text-gray transition"
+              >
+                rodrigo@laproductorafilms.com
+              </a>
             </div>
           </div>
         </div>
