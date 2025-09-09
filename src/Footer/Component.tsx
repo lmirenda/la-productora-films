@@ -15,9 +15,17 @@ export async function Footer() {
         {/* Copyright */}
         <div className="text-center text-[14px] md:text-[16px] mx-auto">
           ©2025 La Productora Films. <br className="block md:hidden" /> Follow us on{' '}
-          <a href="https://www.instagram.com/laproductorafilms/?hl=en">Instagram</a> |{' '}
-          <a href="https://www.vimeo.com/laproductorafilms">Vimeo</a> |{' '}
-          <a href="https://www.imdb.com/es-es/search/title/?companies=co0280497">IMDB</a>
+          <a href="https://www.instagram.com/laproductorafilms/?hl=en" target="_blank">
+            Instagram
+          </a>{' '}
+          |{' '}
+          <a href="https://www.vimeo.com/laproductorafilms" target="_blank">
+            Vimeo
+          </a>{' '}
+          |{' '}
+          <a href="https://www.imdb.com/es-es/search/title/?companies=co0280497" target="_blank">
+            IMDB
+          </a>
         </div>
       </div>
     </footer>
