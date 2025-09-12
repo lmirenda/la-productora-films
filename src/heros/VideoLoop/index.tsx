@@ -2,14 +2,14 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import type { Page } from '@/payload-types'
-import { createFromNextReadableStream } from 'next/dist/client/components/router-reducer/fetch-server-response'
 
-export const VideoLoopHero: React.FC<Page['hero']> = () => {
+// 👇 ACEPTA los datos del hero (opcional; con fallback no se rompe si no llegan)
+export const VideoLoopHero: React.FC<Page['hero']> = (hero) => {
   const { setHeaderTheme } = useHeaderTheme()
   const [size, setSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 })
   const [useNarrowVideo, setUseNarrowVideo] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [isLoading, setIsLoading] = useState(false) // para fade-in/spinner
+  const [isLoading, setIsLoading] = useState(false)
   const [shouldMute, setShouldMute] = useState(true)
   const [stableViewportHeight, setStableViewportHeight] = useState(0)
 
@@ -25,7 +25,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       }
     }
 
-    const videoRatio = 16 / 9 // tu video desktop es 16:9
+    const videoRatio = 16 / 9
     if (vw / vh > videoRatio) {
       setSize({ width: vw, height: vw / videoRatio })
     } else {
@@ -38,7 +38,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       const vw = window.innerWidth
       const vh = window.innerHeight
       const viewportRatio = vw / vh
-      setUseNarrowVideo(viewportRatio <= 0.9) // vertical/estrecho → mobile
+      setUseNarrowVideo(viewportRatio <= 0.9)
     }
 
     const checkMobile = () => {
@@ -48,7 +48,7 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
       )
       setIsMobile(isMobileDevice)
       if (isMobileDevice) {
-        setShouldMute(true) // autoplay en iOS exige muted
+        setShouldMute(true)
         setStableViewportHeight(window.innerHeight)
       }
     }
@@ -67,18 +67,18 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     updateSize()
     window.addEventListener('resize', updateSize)
 
-    if (isMobile && window.visualViewport) {
+    if (isMobile && (window as any).visualViewport) {
       const handleVV = () => {
-        const h = window.visualViewport!.height
+        const h = (window as any).visualViewport!.height
         if (h > stableViewportHeight * 0.9) updateSize()
       }
-      window.visualViewport.addEventListener('resize', handleVV)
+      ;(window as any).visualViewport.addEventListener('resize', handleVV)
 
       return () => {
         document.documentElement.style.overflow = ''
         document.body.style.overflow = ''
         window.removeEventListener('resize', updateSize)
-        window.visualViewport?.removeEventListener('resize', handleVV)
+        ;(window as any).visualViewport?.removeEventListener('resize', handleVV)
       }
     }
 
@@ -89,12 +89,35 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
     }
   }, [setHeaderTheme, updateSize, isMobile, stableViewportHeight])
 
-  // Rutas de video local (ponlos en /public/video/)
   const desktopSrc = '/videos/hero-home-desktop.mp4'
   const mobileSrc = '/videos/hero-home-mobile.mp4'
-
-  // Elegimos fuente: si el viewport es estrecho o es dispositivo móvil, usa el mobile
   const src = useNarrowVideo || isMobile ? mobileSrc : desktopSrc
+
+  const links = (hero as any)?.linkGroup?.links as
+    | Array<{ label?: string; url?: string; newTab?: boolean }>
+    | undefined
+  const cta = (hero as any)?.cta ?? {}
+  const fileUrl = cta.file && typeof cta.file === 'object' ? cta.file.url : undefined
+  const firstLink = (hero as any)?.links?.[0]?.link
+  const ctaLabel = cta.label ?? firstLink?.label ?? 'Cash Rebate Program'
+  const ctaHref = fileUrl ?? cta.url ?? firstLink?.url ?? '/pdf/cash-rebate-program.pdf'
+  const ctaNewTab = Boolean(cta.newTab ?? firstLink?.newTab)
+  const downloadAttr = fileUrl && cta.download ? { download: cta.filename || undefined } : {}
+  // Extrae URLs del CMS si existen (soporta number | Media)
+  const cmsDesktop =
+    (hero as any)?.videoDesktop && typeof (hero as any).videoDesktop !== 'number'
+      ? (hero as any).videoDesktop.url
+      : undefined
+
+  const cmsMobile =
+    (hero as any)?.videoMobile && typeof (hero as any).videoMobile !== 'number'
+      ? (hero as any).videoMobile.url
+      : undefined
+
+  const poster =
+    (hero as any)?.poster && typeof (hero as any).poster !== 'number'
+      ? (hero as any).poster.url
+      : undefined
 
   return (
     <div
@@ -107,10 +130,8 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
         height: isMobile && stableViewportHeight > 0 ? `${stableViewportHeight}px` : '100vh',
       }}
     >
-      {/* Fondo negro */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* Video local (sin poster) */}
       <video
         autoPlay
         muted={shouldMute}
@@ -118,7 +139,6 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
         loop
         preload="auto"
         src={src}
-        // IMPORTANTE: mostrar el video apenas hay primer frame
         onLoadedData={() => setIsLoading(false)}
         onPlay={() => setIsLoading(false)}
         style={{
@@ -129,25 +149,26 @@ export const VideoLoopHero: React.FC<Page['hero']> = () => {
           height: `${size.height}px`,
           transform: 'translate(-50%, -50%)',
           objectFit: 'cover',
-          // no arranques en 0 de opacidad; dejalo visible
           opacity: 1,
           transition: 'none',
           pointerEvents: 'none',
         }}
         aria-hidden="true"
+        poster={poster}
       />
 
-      {/* Loading overlay mientras sale el primer frame */}
       {isLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-black">
           <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
-
-      {/* CTA inferior (igual que el tuyo) */}
-      <a href="/pdf/cash-rebate-program.pdf" download="cash-rebate-program.pdf">
+      <a
+        href={ctaHref}
+        {...(ctaNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...downloadAttr}
+      >
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 text-white border border-white rounded-full px-4 py-2 hover:bg-white hover:text-black transition-colors cursor-pointer pointer-events-auto min-w-[200px]">
-          Cash Rebate Program
+          {ctaLabel}
         </div>
       </a>
     </div>

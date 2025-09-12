@@ -156,6 +156,18 @@ export interface Page {
   title: string;
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'videoLoop' | 'noImpact' | 'soundVideo';
+    /**
+     * Video horizontal (mp4) para desktop
+     */
+    videoDesktop?: (number | null) | Media;
+    /**
+     * Video vertical/cuadrado (mp4) para mobile
+     */
+    videoMobile?: (number | null) | Media;
+    /**
+     * Imagen poster (opcional, para evitar frame negro al cargar)
+     */
+    poster?: (number | null) | Media;
     richText?: {
       root: {
         type: string;
@@ -195,9 +207,32 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
+    /**
+     * Botón del Hero: etiqueta + PDF (o URL alternativa)
+     */
+    cta?: {
+      label: string;
+      /**
+       * Elegí un PDF desde Media (opcional si usás URL)
+       */
+      file?: (number | null) | Media;
+      /**
+       * Se usa si no hay PDF arriba
+       */
+      url?: string | null;
+      newTab?: boolean | null;
+      download?: boolean | null;
+      filename?: string | null;
+    };
     media?: (number | null) | Media;
+    /**
+     * Logos opcionales de sponsors
+     */
     sponsors?: (number | Media)[] | null;
-    title: string;
+    /**
+     * Título principal del hero.
+     */
+    title?: string | null;
   };
   layout: (
     | CallToActionBlock
@@ -208,9 +243,137 @@ export interface Page {
     | EmptyBlock
     | FilmArchiveBlock
     | CommercialArchiveBlock
-    | ContactUsBlock
-    | ExpertiseBlock
-    | ArtificialIntelligenceBlock
+    | {
+        leftOrgTitle?: string | null;
+        leftGroups?:
+          | {
+              heading: string;
+              people?:
+                | {
+                    employee?: (number | null) | Employee;
+                    name?: string | null;
+                    email?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        rightOrgTitle?: string | null;
+        rightGroups?:
+          | {
+              heading: string;
+              people?:
+                | {
+                    employee?: (number | null) | Employee;
+                    name?: string | null;
+                    email?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactUs';
+      }
+    | {
+        top?: {
+          title?: string | null;
+          body?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          ctas?:
+            | {
+                label: string;
+                file?: (number | null) | Media;
+                /**
+                 * Se usa si no hay PDF arriba
+                 */
+                url?: string | null;
+                newTab?: boolean | null;
+                download?: boolean | null;
+                filename?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        middle?: {
+          title?: string | null;
+          body?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        bottom?: {
+          title?: string | null;
+          body?: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'expertise';
+      }
+    | {
+        topImage?: (number | null) | Media;
+        leftImage?: (number | null) | Media;
+        rightImage?: (number | null) | Media;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'artificialIntelligence';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -221,53 +384,6 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: number;
-  title: string;
-  heroImage?: (number | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (number | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -365,6 +481,53 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  heroImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedPosts?: (number | Post)[] | null;
+  categories?: (number | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (number | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -906,33 +1069,6 @@ export interface Commercial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactUsBlock".
- */
-export interface ContactUsBlock {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contactUs';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExpertiseBlock".
- */
-export interface ExpertiseBlock {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'expertise';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArtificialIntelligenceBlock".
- */
-export interface ArtificialIntelligenceBlock {
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'artificialIntelligence';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1207,6 +1343,9 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
+        videoDesktop?: T;
+        videoMobile?: T;
+        poster?: T;
         richText?: T;
         links?:
           | T
@@ -1223,6 +1362,16 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+        cta?:
+          | T
+          | {
+              label?: T;
+              file?: T;
+              url?: T;
+              newTab?: T;
+              download?: T;
+              filename?: T;
+            };
         media?: T;
         sponsors?: T;
         title?: T;
@@ -1238,9 +1387,87 @@ export interface PagesSelect<T extends boolean = true> {
         empty?: T | EmptyBlockSelect<T>;
         filmArchive?: T | FilmArchiveBlockSelect<T>;
         commercialArchive?: T | CommercialArchiveBlockSelect<T>;
-        contactUs?: T | ContactUsBlockSelect<T>;
-        expertise?: T | ExpertiseBlockSelect<T>;
-        artificialIntelligence?: T | ArtificialIntelligenceBlockSelect<T>;
+        contactUs?:
+          | T
+          | {
+              leftOrgTitle?: T;
+              leftGroups?:
+                | T
+                | {
+                    heading?: T;
+                    people?:
+                      | T
+                      | {
+                          employee?: T;
+                          name?: T;
+                          email?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              rightOrgTitle?: T;
+              rightGroups?:
+                | T
+                | {
+                    heading?: T;
+                    people?:
+                      | T
+                      | {
+                          employee?: T;
+                          name?: T;
+                          email?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        expertise?:
+          | T
+          | {
+              top?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    ctas?:
+                      | T
+                      | {
+                          label?: T;
+                          file?: T;
+                          url?: T;
+                          newTab?: T;
+                          download?: T;
+                          filename?: T;
+                          id?: T;
+                        };
+                  };
+              middle?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                  };
+              bottom?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        artificialIntelligence?:
+          | T
+          | {
+              topImage?: T;
+              leftImage?: T;
+              rightImage?: T;
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1378,30 +1605,6 @@ export interface CommercialArchiveBlockSelect<T extends boolean = true> {
         commercial?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactUsBlock_select".
- */
-export interface ContactUsBlockSelect<T extends boolean = true> {
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ExpertiseBlock_select".
- */
-export interface ExpertiseBlockSelect<T extends boolean = true> {
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArtificialIntelligenceBlock_select".
- */
-export interface ArtificialIntelligenceBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

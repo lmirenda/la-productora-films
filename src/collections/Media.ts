@@ -40,6 +40,7 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     // Using Vercel Blob Storage - no local staticDir needed
+    mimeTypes: ['image/*', 'video/mp4', 'video/webm', 'application/pdf'],
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [
