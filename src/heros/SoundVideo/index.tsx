@@ -1,9 +1,12 @@
 'use client'
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
-import type { Page } from '@/payload-types'
+import type { Page, Media as MediaType } from '@/payload-types'
 
-export const SoundVideo: React.FC<Page['hero']> = () => {
+const mediaURL = (m?: number | MediaType | null) =>
+  m && typeof m === 'object' ? (m.url ?? undefined) : undefined
+
+export const SoundVideo: React.FC<Page['hero']> = (hero) => {
   const { setHeaderTheme } = useHeaderTheme()
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
@@ -12,7 +15,16 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [stableViewportHeight, setStableViewportHeight] = useState(0)
 
-  // ajusta a 16:9 siempre
+  // --------- valores desde el CMS + fallbacks ----------
+  const cmsDesktop = mediaURL((hero as any)?.videoDesktop)
+  const cmsMobile = mediaURL((hero as any)?.videoMobile)
+  const poster = mediaURL((hero as any)?.poster)
+  const title = (hero as any)?.title ?? 'AI-powered.\nEmotion-driven.'
+
+  const desktopMp4 = cmsDesktop ?? '/videos/hero-ai-desktop.mp4'
+  const mobileMp4 = cmsMobile ?? '/videos/hero-ai-mobile.mp4'
+  // -----------------------------------------------------
+
   const updateSize = useCallback(() => {
     const vw = window.innerWidth
     let vh = window.innerHeight
@@ -33,7 +45,9 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     }
     const checkMobile = () => {
       const ua = navigator.userAgent || navigator.vendor || (window as any).opera || ''
-      const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+      const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+        ua,
+      )
       setIsMobile(isMobileDevice)
       if (isMobileDevice) setStableViewportHeight(window.innerHeight)
     }
@@ -62,8 +76,6 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
     return () => window.removeEventListener('resize', updateSize)
   }, [setHeaderTheme, updateSize, isMobile, stableViewportHeight])
 
-  const desktopMp4 = '/videos/hero-ai-desktop.mp4'
-  const mobileMp4  = '/videos/hero-ai-mobile.mp4'
   const useMobile = useNarrowVideo || isMobile
 
   const tryPlay = useCallback(() => {
@@ -100,7 +112,7 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
         muted
         playsInline
         loop
-        preload="auto"          
+        preload="auto"
         disablePictureInPicture
         controls={false}
         onLoadedMetadata={tryPlay}
@@ -118,14 +130,16 @@ export const SoundVideo: React.FC<Page['hero']> = () => {
         }}
         aria-hidden="true"
         src={useMobile ? mobileMp4 : desktopMp4}
+        poster={poster}
       />
 
-      <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 font-avenir-next">
-        <h1 className="text-white text-2xl md:text-[46px] font-[500] text-center">
-          AI-powered. <br className="block md:hidden" />
-          Emotion-driven.
-        </h1>
-      </div>
+      {title && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 font-avenir-next">
+          <h1 className="whitespace-pre-line text-white text-2xl md:text-[46px] font-[500] text-center px-6">
+            {title}
+          </h1>
+        </div>
+      )}
     </div>
   )
 }
